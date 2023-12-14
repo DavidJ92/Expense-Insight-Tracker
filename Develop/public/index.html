@@ -1,0 +1,43 @@
+<!-- index.html (inside the 'public' directory) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Expense Tracker</h1>
+    <form id="expenseForm">
+      <div>
+        <label for="expenseTitle">Expense Title:</label>
+        <input type="text" id="expenseTitle" name="expenseTitle">
+      </div>
+      <div>
+        <label for="expenseAmount">Amount:</label>
+        <input type="number" id="expenseAmount" name="expenseAmount">
+      </div>
+      <div>
+        <label for="expenseCategory">Category:</label>
+        <input type="text" id="expenseCategory" name="expenseCategory">
+      </div>
+      <div>
+        <label for="expenseComment">Comment:</label>
+        <textarea id="expenseComment" name="expenseComment"></textarea>
+      </div>
+      <button type="submit">Add Expense</button>
+    </form>
+
+    <div id="expenseList">
+      <!-- Expense items will be displayed here -->
+    </div>
+  </div>
+
+  <script src="/Develop/chartHandler.js"></script>
+  <script src="/Develop/public/js/scritp.js"></script>
+</body>
+</html>
