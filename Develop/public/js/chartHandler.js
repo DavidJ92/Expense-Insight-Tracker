@@ -5,6 +5,15 @@ const monthlyExpenses = {
     January: 1500,
     February: 2200,
     March: 1800,
+    April: 1200,
+    May: 2000,
+    June: 2500,
+    July: 2200,
+    August: 1900,
+    September: 1800,
+    October: 2800,
+    November: 2600,
+    December: 2200
     // ... Add more months and expenses as needed
   };
   
