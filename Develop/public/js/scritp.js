@@ -1,19 +1,43 @@
-// Sample data (replace this with your actual expense data)
-const data = {
-    expenses: [
-      { title: 'Lunch', amount: 15.50, category: 'Food' },
-      { title: 'Transportation', amount: 30.00, category: 'Travel' },
-      // Add more expense objects as needed
-    ]
-  };
+// scripts.js
+
+// Sample expense data (replace this with your logic to handle expenses)
+let expenses = [];
+
+// Function to render expenses
+function renderExpenses() {
+  const expenseList = document.getElementById('expenseList');
+  expenseList.innerHTML = ''; // Clear previous content
   
-  // Compile the Handlebars template
-  const source = document.getElementById('expense-template').innerHTML;
-  const template = Handlebars.compile(source);
+  expenses.forEach(expense => {
+    const expenseDiv = document.createElement('div');
+    expenseDiv.classList.add('expense-item');
+    expenseDiv.innerHTML = `
+      <h3>${expense.title}</h3>
+      <p>Amount: ${expense.amount}</p>
+      <p>Category: ${expense.category}</p>
+      <p>Comment: ${expense.comment}</p>
+    `;
+    expenseList.appendChild(expenseDiv);
+  });
+}
+
+// Function to handle form submission
+document.getElementById('expenseForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form submission
   
-  // Render the template with the data
-  const renderedHtml = template(data);
+  const title = document.getElementById('expenseTitle').value;
+  const amount = document.getElementById('expenseAmount').value;
+  const category = document.getElementById('expenseCategory').value;
+  const comment = document.getElementById('expenseComment').value;
   
-  // Add the rendered HTML to your page
-  document.getElementById('expense-list').innerHTML = renderedHtml;
+  // Add the new expense to the expenses array
+  expenses.push({ title, amount, category, comment });
+  
+  // Render expenses
+  renderExpenses();
+  
+  // Clear form fields after submission
+  document.getElementById('expenseForm').reset();
+});
+
   
