@@ -1,19 +1,34 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
- host: process.env.DB_HOST,
- dialect: 'mysql'
-});
-
-const Spending = sequelize.define('spending', {
- month: {
-    type: DataTypes.STRING,
-    allowNull: false
- },
- amount: {
-    type: DataTypes.FLOAT,
-    allowNull: false
+class Spending extends Model {
+ static init(sequelize) {
+    super.init(
+      {
+        id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
+        category: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        amount: {
+          type: DataTypes.DECIMAL(10, 2),
+          allowNull: false,
+        },
+        date: {
+          type: DataTypes.DATE,
+          allowNull: false,
+        },
+      },
+      {
+        sequelize,
+        underscored: true,
+        timestamps: false,
+      }
+    );
  }
-});
+}
 
 module.exports = Spending;
