@@ -6,13 +6,16 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 });
 
 const Spending = sequelize.define('spending', {
+ id: DataTypes.INTEGER,
+ allowNull: false,
+
  month: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
  },
  amount: {
     type: DataTypes.FLOAT,
-    allowNull: false
+    allowNull: false,
  }
 });
 
