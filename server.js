@@ -2,17 +2,10 @@ const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const hbs = require('express-handlebars');
-const { Sequelize } = require('sequelize');
-const { DataTypes } = require('sequelize');
 const Spending = require('./models/spending');
 
+const sequelize = require('./config/connection');
 const app = express();
-
-// Set up environment variables
-require('dotenv').config();
-
-// Set up MySQL database
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, { host: process.env.DB_HOST, dialect: 'mysql' });
 
 // Set up handlebars view engine
 app.engine('handlebars', hbs.engine({ defaultLayout: 'main' }));
