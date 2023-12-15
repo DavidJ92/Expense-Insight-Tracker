@@ -28,6 +28,7 @@ class Spending extends Model {
         timestamps: false,
       }
     );
+   
  }
 }
 
