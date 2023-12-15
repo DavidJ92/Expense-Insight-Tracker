@@ -1,11 +1,14 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
+<<<<<<< HEAD
 // feature/add-expenses
 // const sequelize = new Sequelize(process.env.DB_STRING);
 
 // module.exports = sequelize;
 
+=======
+>>>>>>> 4c5d93f (fix error in connection.js/dowload express-handlebars dependency)
 let sequelize;
 
 if (process.env.JAWSDB_URL) {
@@ -24,4 +27,8 @@ if (process.env.JAWSDB_URL) {
 }
 
 module.exports = sequelize;
+<<<<<<< HEAD
 // main
+=======
+
+>>>>>>> 4c5d93f (fix error in connection.js/dowload express-handlebars dependency)
