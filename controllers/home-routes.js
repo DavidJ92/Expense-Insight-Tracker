@@ -38,6 +38,17 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+//sign up route
+router.get('/signup', (req, res) => {
+  //if user is logged in, redirects to logout page
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  //else render signup.handlebars
+  res.render('signup');
+});
+
 //logout route
 router.get('/logout', (req, res) => {
     //if user is logged out, redirects to logout page
