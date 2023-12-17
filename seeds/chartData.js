@@ -2,36 +2,43 @@ const { Spending } = require('../models');
 
 const chartData = [
     {   
-        month: '12/1/23',
-        amount: '387.93',
+        category: 'food',
+        amount: '8.93',
+        date: '12/1/23',
     },
     {   
-        month: '12/2/23',
-        amount: '543.50',
+        category: 'shopping',
+        amount: '43.50',
+        date: '12/2/23',
     },
     {   
-        month: '12/3/23',
-        amount: '433.54',
+        category: 'shopping',
+        amount: '33.54',
+        date: '12/3/23',
     },
     {   
-        month: '12/4/23',
-        amount: '350.24',
+        amount: '5.24',
+        date: '12/4/23',
     },
     {   
-        month: '12/5/23',
-        amount: '200.33',
+        category: 'food',
+        amount: '20.33',
+        date: '12/5/23',
     },
     {
-        month: '12/6/23',
-        amount: '610.42',
+        category: 'food',
+        amount: '10.42',
+        date: '12/6/23',
     },
     {   
-        month: '12/7/23',
-        amount: '323.42',
+        category: 'food',
+        amount: '23.42',
+        date: '12/7/23',
     },
     {   
-        month: '12/8/23',
-        amount: '854.21',
+        category: 'shopping',
+        amount: '54.21',
+        date: '12/8/23',
     },
 ]
 
