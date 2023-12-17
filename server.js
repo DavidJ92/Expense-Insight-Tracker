@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
-const Spending = require('./models/spending');
 const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
