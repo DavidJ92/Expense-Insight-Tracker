@@ -12,6 +12,7 @@
 </head>
 
 <body>
+<canvas id="expense-chart"></canvas>
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -57,7 +58,7 @@
     <div id="expense-list"></div>
      {{{body}}}
   </div>
-</main> 
+</main>
 
  {{#if loggedIn}}
   <script src="/js/logout.js"></script>
@@ -77,6 +78,10 @@
     {{/each}}
   </script>
 
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
   <!-- Bootstrap JavaScript (jQuery and Popper.js dependencies are required) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -86,7 +91,7 @@
   <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
 
   <!-- Your Custom JavaScript -->
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="/js/chartHandler.js"></script>
   <script src="/js/main.js"></script>
 

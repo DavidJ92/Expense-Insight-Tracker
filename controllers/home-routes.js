@@ -37,11 +37,11 @@ router.get('/signup', (req, res) => {
 router.get('/logout', (req, res) => {
  // if user is logged out, redirects to logout page
  if (req.session.loggedOut) {
-    res.redirect('/');
-    return;
+  req.session.destroy(() => {
+     // else render logout.handlebars
+   res.render('logout');
+  });
  }
- // else render logout.handlebars
- res.render('logout');
 });
 
 module.exports = router;
