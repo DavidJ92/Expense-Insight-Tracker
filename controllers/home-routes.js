@@ -11,37 +11,37 @@ router.get('/', async (req, res) => {
       res.render('all', { spendings });
     });
 
-//login route
+// GET login route
 router.get('/login', (req, res) => {
-  //if user is logged in, redirects to homepage
-  if (req.session.loggedIn) {
+ // if user is logged in, redirects to homepage
+ if (req.session.loggedIn) {
     res.redirect('/');
     return;
-  }
-  //else render login.handlebars
-  res.render('login');
+ }
+ // else render login.handlebars
+ res.render('login');
 });
 
-//sign up route
+// GET sign up route
 router.get('/signup', (req, res) => {
-  //if user is logged in, redirects to homepage
-  if (req.session.loggedIn) {
+ // if user is logged in, redirects to homepage
+ if (req.session.loggedIn) {
     res.redirect('/');
     return;
-  }
-  //else render signup.handlebars
-  res.render('signup');
+ }
+ // else render signup.handlebars
+ res.render('signup');
 });
 
-//logout route
+// GET logout route
 router.get('/logout', (req, res) => {
-    //if user is logged out, redirects to logout page
-    if (req.session.loggedOut) {
-      res.redirect('/');
-      return;
-    }
-    //else render logout.handlebars
-    res.render('logout');
-  });
+ // if user is logged out, redirects to logout page
+ if (req.session.loggedOut) {
+    res.redirect('/');
+    return;
+ }
+ // else render logout.handlebars
+ res.render('logout');
+});
 
 module.exports = router;

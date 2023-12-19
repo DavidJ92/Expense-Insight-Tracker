@@ -1,5 +1,5 @@
 // Sample expense data (replace this with your logic to handle expenses)
-let expenses = [] // Array to store expenses
+let expenses = []; // Array to store expenses
 
 // Function to render expenses
 function renderExpenses() {
@@ -21,7 +21,7 @@ function renderExpenses() {
 }
 
 // Function to handle form submission
-document.getElementById('expenseForm').addEventListener('submit', function(event) {
+function handleExpenseFormSubmit(event) {
   event.preventDefault(); // Prevent form submission
   
   const title = document.getElementById('expenseTitle').value;
@@ -38,6 +38,13 @@ document.getElementById('expenseForm').addEventListener('submit', function(event
   
   // Clear form fields after submission
   document.getElementById('expenseForm').reset();
-});
+}
 
-  
+// Wait for DOM content to load before executing code
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listener to the expense form
+  const expenseForm = document.getElementById('expenseForm');
+  if (expenseForm) {
+    expenseForm.addEventListener('submit', handleExpenseFormSubmit);
+  }
+});
