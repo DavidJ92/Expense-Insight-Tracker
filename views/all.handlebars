@@ -1,0 +1,12 @@
+</div>
+  {{#each spendings as |spending|}}
+    <div class='dish col-md-5'>
+      <p>
+        {{spending.id}}.
+        {{spending.category}}
+        {{spending.amount}}
+        {{spending.date}}
+        {{spending.user_id}}
+      </p>
+    </div>
+  {{/each}}

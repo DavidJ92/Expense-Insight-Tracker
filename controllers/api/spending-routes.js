@@ -1,5 +1,21 @@
-// const router = require('express').Router();
-// const { Spending } = require('../../models');
+const router = require('express').Router();
+const { Spending } = require('../../models');
+
+// route to create/add a dish using async/await
+router.post('/', async (req, res) => {
+    try { 
+      const spendingData = await Spending.create({
+      category: req.body.category,
+      amount: req.body.amount,
+      date: req.body.date,
+      user_id: req.body.user_id,
+    });
+    // if the spending is successfully created, the new response will be returned as json
+    res.status(200).json(spendingData)
+  } catch (err) {
+    res.status(400).json(err);
+  }
+  });
 
 // // Set up routes
 // router.get('/', async (req, res) => {
@@ -27,4 +43,4 @@
 //     }
 // });
 
-// module.exports = router;
+module.exports = router;
