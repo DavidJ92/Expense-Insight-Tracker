@@ -1,15 +1,12 @@
-// Get references to the HTML elements
-const expenseForm = document.getElementById('expenseForm');
-const expenseList = document.getElementById('expenseList');
-
-// Array to store expenses
-let expenses = [];
+// Sample expense data (replace this with your logic to handle expenses)
+let expenses = []; // Array to store expenses
 
 // Function to render expenses
 function renderExpenses() {
- expenseList.innerHTML = ''; // Clear previous content
+  const expenseList = document.getElementById('expenseList');
+  expenseList.innerHTML = ''; // Clear previous content
   
- expenses.forEach(expense => {
+  expenses.forEach(expense => {
     const expenseDiv = document.createElement('div');
     expenseDiv.classList.add('expense-item');
     expenseDiv.innerHTML = `
@@ -20,25 +17,34 @@ function renderExpenses() {
       <p>Comment: ${expense.comment}</p>
     `;
     expenseList.appendChild(expenseDiv);
- });
+  });
 }
 
 // Function to handle form submission
-expenseForm.addEventListener('submit', function(event) {
- event.preventDefault(); // Prevent form submission
+function handleExpenseFormSubmit(event) {
+  event.preventDefault(); // Prevent form submission
   
- const title = document.getElementById('expenseTitle').value;
- const date = document.getElementById('expenseDate').value;
- const amount = document.getElementById('expenseAmount').value;
- const category = document.getElementById('expenseCategory').value;
- const comment = document.getElementById('expenseComment').value;
+  const title = document.getElementById('expenseTitle').value;
+  const date = document.getElementById('expenseDate').value;
+  const amount = document.getElementById('expenseAmount').value;
+  const category = document.getElementById('expenseCategory').value;
+  const comment = document.getElementById('expenseComment').value;
   
- // Add the new expense to the expenses array
- expenses.push({ title, date, amount, category, comment });
+  // Add the new expense to the expenses array
+  expenses.push({ title, date, amount, category, comment });
   
- // Render expenses
- renderExpenses();
+  // Render expenses
+  renderExpenses();
   
- // Clear form fields after submission
- expenseForm.reset();
+  // Clear form fields after submission
+  document.getElementById('expenseForm').reset();
+}
+
+// Wait for DOM content to load before executing code
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listener to the expense form
+  const expenseForm = document.getElementById('expenseForm');
+  if (expenseForm) {
+    expenseForm.addEventListener('submit', handleExpenseFormSubmit);
+  }
 });
