@@ -1,24 +1,24 @@
-//logging in
+//login in
 const loginFormHandler = async (event) => {
-    event.preventDefault();
-  
-    const email = document.querySelector('#email-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
-  
-    if (email && password ) {
-      const response = await fetch('/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert('Please try again.');
-      }
+  event.preventDefault();
+
+  const email = document.querySelector('#email-login').value.trim();
+  const password = document.querySelector('#password-login').value.trim();
+
+  if (email && password) {
+    const response = await fetch('/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert('Please try again.');
     }
+  }
 };
-  
-  //listening on click
-  document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
+
+//listening on click
+document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
