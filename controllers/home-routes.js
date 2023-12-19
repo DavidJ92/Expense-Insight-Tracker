@@ -17,7 +17,7 @@ router.get('/', withAuth, async (req, res) => {
       chart.get({ plain: true })
     );
     
-    res.render('homepage', {
+    res.render('main', {
       expenseChart,
       loggedIn: req.session.loggedIn,
     });
@@ -40,7 +40,7 @@ router.get('/login', (req, res) => {
 
 //sign up route
 router.get('/signup', (req, res) => {
-  //if user is logged in, redirects to logout page
+  //if user is logged in, redirects to homepage
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
