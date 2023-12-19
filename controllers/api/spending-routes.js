@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Spending } = require('../../models');
 
-// route to create/add a dish using async/await
+// route to create/add a spending using async/await
 router.post('/', async (req, res) => {
     try { 
       const spendingData = await Spending.create({
