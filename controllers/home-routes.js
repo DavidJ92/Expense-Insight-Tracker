@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Spending } = require('../models');
 const withAuth = require('../utils/auth');
 
-//if user is logged in, show line chart for the year
+//if user is logged in, show spendings for the year
 router.get('/', withAuth, async (req, res) => {
   const spendingData = await Spending.findAll().catch((err) => { 
       res.json(err);
