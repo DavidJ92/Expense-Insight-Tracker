@@ -1,29 +1,36 @@
 const router = require('express').Router();
+const { Spending } = require('../models');
 const withAuth = require('../utils/auth');
 
 //if user is logged in, show line chart for the year
 router.get('/', withAuth, async (req, res) => {
-  try {
-    const chartData = await Chart.findAll({
-      include: [
-        {
-          // model: Dashboard,
-          // attributes: ['title', 'date'],
-        },
-      ],
-    });
+  const spendingHistory = await Spending.findAll();
+  res.render('index', { spendingHistory });
+});
 
-    const expenseChart = chartData.map((chart) =>
-      chart.get({ plain: true })
-    );
+router.post('/spending', withAuth, async (req, res) => {
+  try {
+      const newSpending = await Spending.create(req.body);
+      res.json(newSpending);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
+});
+
+router.get('/spending', withAuth, async (req, res) => {
+  try {
+      const spendingData = await Spending.findAll();
+      res.json(spendingData);
     
-    res.render('homepage', {
-      expenseChart,
-      loggedIn: req.session.loggedIn,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+      res.render('main', {
+        expenseChart,
+        loggedIn: req.session.loggedIn,
+      });
+
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
   }
 });
 
@@ -40,7 +47,7 @@ router.get('/login', (req, res) => {
 
 //sign up route
 router.get('/signup', (req, res) => {
-  //if user is logged in, redirects to logout page
+  //if user is logged in, redirects to homepage
   if (req.session.loggedIn) {
     res.redirect('/');
     return;

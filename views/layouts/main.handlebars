@@ -59,6 +59,10 @@
   </div>
 </main> 
 
+ {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+
   <!-- Handlebars Template -->
   <script id="expense-template" type="text/x-handlebars-template">
     {{#each expenses}}
