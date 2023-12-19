@@ -2,39 +2,14 @@ const router = require('express').Router();
 const { Spending } = require('../models');
 const withAuth = require('../utils/auth');
 
-// GET homepage with line chart
-router.get('/', withAuth, async (req, res) => {
- const spendingHistory = await Spending.findAll();
- res.render('index', { spendingHistory });
-});
-
-// POST new spending entry
-router.post('/spending', withAuth, async (req, res) => {
- try {
-    const newSpending = await Spending.create(req.body);
-    res.json(newSpending);
- } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
- }
-});
-
-// GET all spending entries for the year
-router.get('/spending', withAuth, async (req, res) => {
- try {
-    const spendingData = await Spending.findAll();
-    res.json(spendingData);
-
-    res.render('main', {
-      expenseChart,
-      loggedIn: req.session.loggedIn,
+//if user is logged in, show line chart for the year
+router.get('/', async (req, res) => {
+  const spendingData = await Spending.findAll().catch((err) => { 
+      res.json(err);
     });
-
- } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
- }
-});
+      const spendings = spendingData.map((spending) => spending.get({ plain: true }));
+      res.render('all', { spendings });
+    });
 
 // GET login route
 router.get('/login', (req, res) => {
