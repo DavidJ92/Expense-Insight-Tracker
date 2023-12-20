@@ -1,11 +1,11 @@
 </div>
-  {{#each spendings as |spending|}}
-    <div class='dish col-md-5'>
+  {{#each expenses as |expense|}}
+    <div class='expense col-md-5'>
       <p>
-        {{format_date spending.date}}: 
-        {{spending.category}}, 
-        <strong>$ {{spending.amount}}</strong>
-        {{spending.user_id}}
+        {{format_date expense.date}}: 
+        {{expense.category}}, 
+        <strong>$ {{expense.amount}}</strong>
+        {{expense.user_id}}
       </p>
     </div>
   {{/each}}

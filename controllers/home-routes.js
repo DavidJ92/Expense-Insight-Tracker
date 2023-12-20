@@ -1,21 +1,42 @@
 const router = require('express').Router();
-const { Expenses } = require('../models');
+const { Expense, User } = require('../models');
 const withAuth = require('../utils/auth');
 
-//if user is logged in, show spendings for the year
+//if user is logged in, show all expenses for the year
 router.get('/', withAuth, async (req, res) => {
   try {
-    const spendingData = await Expenses.findAll();
-    console.log(spendingData);
-    const spendings = spendingData.map((spending) => spending.get({ plain: true }));
-    console.log("here", spendings);
-         res.render('all', { spendings });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+  const expenseData = await Expense.findAll({
+    include: [
+      {
+        model: User,
+        attributes: { exclude: ['password'] },
+      }
+    ]
+  });
 
-//   Spending.findAll()
+  const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+
+  res.render('home', {
+    expenses,
+    loggedIn: req.session.loggedIn,
+  });
+} catch (err) {
+  res.status(500).json(err);
+} 
+  
+  // try {
+  //   const spendingData = await Expense.findAll();
+  //   console.log(spendingData);
+  //   const spendings = spendingData.map((spending) => spending.get({ plain: true }));
+  //   console.log("here", spendings);
+  //        res.render('all', { spendings });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).json(err);
+  // }
+
+//another way to try the above arrow function with .then and .catch  
+//   Expense.findAll()
 //   .then((data)=>{
 //     console.log("THIS SI DATA = ",data)
 //     const spendings = data.map((spending) => spending.get({ plain: true }));
@@ -52,13 +73,10 @@ router.get('/signup', (req, res) => {
 
 // GET logout route
 router.get('/logout', (req, res) => {
- // if user is logged out, redirects to logout page
- if (req.session.loggedOut) {
+  // Destroy the session
   req.session.destroy(() => {
-     // else render logout.handlebars
-   res.render('logout');
+    res.render('logout');
   });
- }
 });
 
 module.exports = router;

@@ -1,15 +1,15 @@
 //adding expense
-const addFormHandler = async (event) => {
+const addExpenseHandler = async (event) => {
     event.preventDefault();
   
+    const date = document.querySelector('#date').value.trim();
     const category = document.querySelector('#category').value.trim();
     const amount = document.querySelector('#amount').value.trim();
-    const date = document.querySelector('#date').value.trim();
-  
-    if (category && amount && date) {
-        const response = await fetch('/api/add-expense', {
+    
+    if (date && category && amount ) {
+        const response = await fetch('/api/expenses/add-expense', {
           method: 'POST',
-          body: JSON.stringify({ category: category, amount: amount, date: date }),
+          body: JSON.stringify({ category, amount, date }),
           headers: { 'Content-Type': 'application/json' },
         });
     
@@ -17,10 +17,10 @@ const addFormHandler = async (event) => {
           alert('Added to list!');
           document.location.replace('/');
         } else {
-          alert('Failed to add. Please try again.');
+          alert('Failed to add expense.');
         }
       }
     };
   
-document.querySelector('.add-form').addEventListener('submit', addFormHandler);
+document.querySelector('.add-form').addEventListener('submit', addExpenseHandler);
   
