@@ -1,19 +1,26 @@
-<div class="expense-container">
+  <div class="expense-container">
 
   {{!-- adding expenses --}}
   <div class="expense-details">
     <h2 class="expense-title">Add Expenses</h2>
     <form class="form add-form">
       <div class="form-group">
-        <label for="date">Date: {{format_date expense.date}}</label>
+        <label for="date">Date: </label>
         <input class="form-input" type="text" id="date"/>
       </div>
       <div class="form-group">
-        <label for="category">Category: {{expense.category}}</label>
-        <input class="form-input" type="text" id="category"/>
+        <label for="category">Category: </label>
+          <select id="categories" name="categories">
+            <option value="1">Personal Spending</option>
+            <option value="2">Travel</option>
+            <option value="3">Miscellaneous</option>
+            <option value="4">Bills &amp; Utilities</option>
+            <option value="5">Restaurants</option>
+            <option value="6">Loan Payments</option>
+          </select>
       </div>
       <div class="form-group">
-        <label for="amount">Amount: <strong>$ {{expense.amount}}</strong></label>
+        <label for="amount">Amount: <strong>$ </strong></label>
         <input class="form-input" type="text" id="amount">
       </div>
       <div class="form-group">
@@ -21,6 +28,22 @@
       </div>
     </form>
   </div>
+
+  {{!-- adding expenses --}}
+  <div class="list-details">
+    <h2 class="list-title">List</h2>
+    <form class="form list-form">
+      <div class="form-group">
+        <ul>
+          <li></li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <button class="btn" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+
 
 </div>
 
