@@ -1,5 +1,8 @@
 // chartHandler.js
 
+// const date = document.querySelector("#date").value.trim();
+// const category = document.querySelector('#category').value.trim();
+
 // Sample data for monthly expenses (replace this with your logic)
 const monthlyExpenses = {
   January: 1500,
@@ -16,7 +19,6 @@ const monthlyExpenses = {
   December: 2200
   // ... Add more months and expenses as needed
 };
-
 
 // Function to render monthly expense chart
 function renderExpenseChart() {

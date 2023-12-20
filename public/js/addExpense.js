@@ -15,7 +15,7 @@ const addExpenseHandler = async (event) => {
     
         if (response.ok) {
           alert('Added to list!');
-          document.location.replace('/');
+          document.location.replace('/add-expense');
         } else {
           alert('Failed to add expense.');
         }
@@ -23,4 +23,3 @@ const addExpenseHandler = async (event) => {
     };
   
 document.querySelector('.add-form').addEventListener('submit', addExpenseHandler);
-  

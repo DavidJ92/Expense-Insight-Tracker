@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Expense } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// get all added expenses route
+// route to all added expenses
 router.get('/add-expense', withAuth, async (req, res) => {
   try {
     const allExpenses = await Expense.findAll({
@@ -13,7 +13,7 @@ router.get('/add-expense', withAuth, async (req, res) => {
       ],
     });
 
-    res.render('addExpense', { allExpenses });
+    res.render('addExpense', { loggedIn: req.session.loggedIn, allExpenses });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Failed to load all expenses. Please try again.' });
@@ -41,5 +41,24 @@ router.post('/add-expense', withAuth, async (req, res) => {
     res.status(400).json({ message: 'Failed to add expense.' });
   }
   });
+
+  // route to delete an existing expense
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+      const oneExpense = Expense.destroy({
+          where: {
+              id: req.params.id, 
+              user_id: req.session.user_id
+          },
+      });
+
+      if (!oneExpense) {
+          res.status(400).json({message: 'No expense with that amount found.'})
+      }
+      res.status(200).json('Expense has been deleted.')
+  } catch (err) {
+      res.status(500).json(err);
+  };
+});
 
 module.exports = router;
