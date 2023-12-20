@@ -29,7 +29,7 @@ app.use(routes);
 
 // Start server
 const PORT = process.env.PORT || 3000;
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
 .then(() => {
   app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}!`);

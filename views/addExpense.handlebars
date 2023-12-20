@@ -1,0 +1,27 @@
+<div class="expense-container">
+
+  {{!-- adding expenses --}}
+  <div class="expense-details">
+    <h2 class="expense-title">Add Expenses</h2>
+    <form class="form add-form">
+      <div class="form-group">
+        <label for="date">Date: {{format_date expense.date}}</label>
+        <input class="form-input" type="text" id="date"/>
+      </div>
+      <div class="form-group">
+        <label for="category">Category: {{expense.category}}</label>
+        <input class="form-input" type="text" id="category"/>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount: <strong>$ {{expense.amount}}</strong></label>
+        <input class="form-input" type="text" id="amount">
+      </div>
+      <div class="form-group">
+        <button class="btn" type="submit">Add to List</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<script src="/js/addExpense.js"></script>

@@ -1,14 +1,18 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Expenses extends Model {}
+class Expense extends Model {}
 
-Expenses.init(
+Expense.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     category: {
       type: DataTypes.STRING,
@@ -16,10 +20,6 @@ Expenses.init(
     },
     amount: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-    },
-    date: {
-      type: DataTypes.DATE,
       allowNull: false,
     },
     user_id: {
@@ -34,8 +34,8 @@ Expenses.init(
     sequelize,
     underscored: true,
     timestamps: false,
-    modelName: 'expenses'
+    modelName: 'expense'
   }
 );
    
-module.exports = Expenses;
+module.exports = Expense;
