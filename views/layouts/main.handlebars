@@ -28,13 +28,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
-        <!-- If user is not logged in, show a login link -->
-        {{#unless loggedIn}}
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        {{/unless}}
-        <!-- Dropdown button for expenses -->
+         <!-- Dropdown button for expenses -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Expenses
@@ -44,19 +38,23 @@
             <a class="dropdown-item" href="/monthly-expenses">Monthly</a>
           </div>
         </li>
-        <!-- If user is logged in, show a logout button -->
+         <!-- If user is logged in, show a logout button -->
         {{#if loggedIn}}
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>
         </li>
-        {{/if}}
-      </ul>
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Sign Up</a>
+        </li>
+       {{/if}}
+       </ul>
     </div>
   </nav>
 
- {{#if loggedIn}}
-  <script src="/js/logout.js"></script>
- {{/if}}
   <div id="expense-list"></div>
      {{{body}}}
   </div>

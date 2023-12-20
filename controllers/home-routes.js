@@ -82,15 +82,15 @@ router.get('/signup', (req, res) => {
  res.render('signup');
 });
 
-// GET add-expense route
+// GET login route
 router.get('/logout', (req, res) => {
-  // if user is logged in, redirects to a
+  // if user is logged in, redirects to homepage
   if (!req.session.loggedIn) {
-   res.redirect('/');
-   return;
- }
-  // else render login.handlebars
-  res.render('login');
+     res.redirect('/login');
+     return;
+  }
+  // else render logout.handlebars
+  res.render('logout');
  });
 
 // GET add-expense route
@@ -102,32 +102,6 @@ router.get('/add-expense', (req, res) => {
 }
  // else render login.handlebars
  res.render('login');
-});
-
-module.exports = router;
-
-// get user's expenses
-router.get('/:id', withAuth, async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.params.id, {
-      attributes: { exclude: ['password'] },
-      include: [
-        {
-          model: Expense, 
-          attributes: [ 'date', 'category', 'amount' ]
-        }
-      ]
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('addExpense', {
-      ...user,
-      loggedIn: req.session.loggedIn
-    });
-  } catch (err) {
-    res.status(500).json(err)
-  }
 });
 
 module.exports = router;

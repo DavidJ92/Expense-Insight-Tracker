@@ -1,29 +1,21 @@
 // logging out
 const logoutHandler = async (event) => {
-  console.log('Logout button clicked');
   event.preventDefault();
 
-  const logoutButton = document.querySelector('#logout'); // Move the declaration here
+  const logout = document.querySelector('#logout'); // Move the declaration here
 
-  if (logoutButton) {
+  if (logout) {
     const response = await fetch('/api/users/logout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace('/login');
     } else {
       alert('Failed to log out. Please try again.');
     }
   }
 };
 
-// Add event listener after logoutHandler declaration
-document.addEventListener('DOMContentLoaded', () => {
-  const logoutButton = document.querySelector('#logout');
-
-  if (logoutButton) {
-    logoutButton.addEventListener('click', logoutHandler);
-  }
-});
+document.querySelector('#logout').addEventListener('click', logout);
