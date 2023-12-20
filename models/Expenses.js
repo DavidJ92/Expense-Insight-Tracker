@@ -1,13 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Spending extends Model {}
+class Expenses extends Model {}
 
-// static init(sequelize) {
-//   super.init(
-//     {
-
-Spending.init(
+Expenses.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -38,11 +34,8 @@ Spending.init(
     sequelize,
     underscored: true,
     timestamps: false,
-    modelName: 'spending'
+    modelName: 'expenses'
   }
 );
-
-//   }
-// }
    
-module.exports = Spending;
+module.exports = Expenses;

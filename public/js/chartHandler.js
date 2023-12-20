@@ -24,25 +24,25 @@ function renderExpenseChart() {
 
   // Create Chart instance
     new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: ['January',
-        'February',
-        'March' ,
-        'April' ,
-        'May' ,
-        'June' ,
-        'July' ,
-        'August' ,
-        'September' ,
-        'October' ,
-        'November' ,
-        'December' ],
-            datasets: [{
-                label: '# of Votes',
-                data: monthlyExpenses,
-                borderWidth: 1
-            }]
+                    'February',
+                    'March' ,
+                    'April' ,
+                    'May' ,
+                    'June' ,
+                    'July' ,
+                    'August' ,
+                    'September' ,
+                    'October' ,
+                    'November' ,
+                    'December' ],
+                        datasets: [{
+                            label: 'Amount Spent',
+                            data: monthlyExpenses,
+                            borderWidth: 1
+                        }]
         },
         options: {
             scales: {
