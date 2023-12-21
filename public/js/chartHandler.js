@@ -16,33 +16,34 @@ let userMonthlyExpenses = {
 
 // Function to add monthly expense for the user
 export function addMonthlyExpense(month, amount) {
+  // Update the expense for the provided month
   userMonthlyExpenses[month] = amount;
 }
 
 // Function to render the monthly expense chart
 export function renderExpenseChart() {
-  const currentPage = window.location.pathname; // Get the current page URL
+  // Get the current page URL
+  const currentPage = window.location.pathname;
 
   // Check if the current page is the home page
   if (currentPage === '/') {
+    // Get the canvas element to render the chart
     const ctx = document.getElementById('myChart');
 
-    // Create Chart instance
+    if (!ctx) {
+      console.error('Canvas element not found.');
+      return; // Exit if the canvas element is not found
+    }
+
+    // Create Chart instance using Chart.js library
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['January', 
-        'February', 
-        'March', 
-        'April', 
-        'May', 
-        'June', 
-        'July', 
-        'August', 
-        'September', 
-        'October', 
-        'November', 
-        'December'],
+        labels: [
+          'January', 'February', 'March', 'April',
+          'May', 'June', 'July', 'August',
+          'September', 'October', 'November', 'December'
+        ],
         datasets: [{
           label: 'Amount Spent',
           data: Object.values(userMonthlyExpenses),
@@ -52,7 +53,7 @@ export function renderExpenseChart() {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true // Start the y-axis at zero
           }
         }
       }
