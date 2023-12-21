@@ -31,18 +31,18 @@ function renderExpenseChart() {
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['January',
-         'February', 
-         'March', 
-         'April', 
-         'May', 
-         'June', 
-         'July', 
-         'August',
-          'September', 
-          'October',
-           'November', 
-           'December'],
+        labels: ['January', 
+        'February', 
+        'March', 
+        'April', 
+        'May', 
+        'June', 
+        'July', 
+        'August', 
+        'September', 
+        'October', 
+        'November', 
+        'December'],
         datasets: [{
           label: 'Amount Spent',
           data: Object.values(userMonthlyExpenses),
@@ -60,5 +60,5 @@ function renderExpenseChart() {
   }
 }
 
-// Call the function to render the chart
-renderExpenseChart();
+// Export the functions to be used in other files if needed
+export { addMonthlyExpense, renderExpenseChart };
