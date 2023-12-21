@@ -7,6 +7,9 @@ const helpers = require('./utils/helpers');
 const routes = require('./controllers');
 require('dotenv').config();
 
+const seedUsers = require('./seeds/userData');
+const seedExpenses = require('./seeds/expenseData');
+
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
@@ -29,11 +32,9 @@ app.use(routes);
 
 // Start server
 const PORT = process.env.PORT || 3000;
-sequelize.sync({ force: false })
-.then(() => {
-  app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}!`);
-    sequelize.sync({ force: true });
-  });
+sequelize.sync({ force: false }).then( async ()  => {
+  await seedUsers();
 
-  });  
+  await seedExpenses();
+  app.listen(PORT, () => console.log('Now listening'));
+});
