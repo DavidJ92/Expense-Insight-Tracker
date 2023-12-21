@@ -32,9 +32,15 @@ app.use(routes);
 
 // Start server
 const PORT = process.env.PORT || 3000;
+const { User } = require("./models");
 sequelize.sync({ force: false }).then( async ()  => {
-  await seedUsers();
+  
+  User.findAll().then( async (users) => {
+    if (users.length === 0) {
+      await seedUsers();
+      await seedExpenses();
+    }
+  });
 
-  await seedExpenses();
   app.listen(PORT, () => console.log('Now listening'));
 });

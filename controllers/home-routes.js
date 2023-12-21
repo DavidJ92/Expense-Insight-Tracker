@@ -76,27 +76,27 @@ router.get('/signup', (req, res) => {
  // if user is logged in, redirects to homepage
  if (req.session.loggedIn) {
     res.redirect('/');
-    return;
  }
  // else render signup.handlebars
  res.render('signup');
 });
 
-// GET login route
+// GET logout route
 router.get('/logout', (req, res) => {
-  // if user is logged in, redirects to homepage
-  if (req.session.loggedIn) {
-  // else render logout.handlebars
-  res.render('logout');
+  if (req.session) {
+    req.session.destroy(() => {
+      res.redirect('/');
+    });
+  } else {
+    res.status(404).end();
   }
- });
+});
 
 // GET add-expense route
 router.get('/add-expense', (req, res) => {
  // if user is logged in, redirects to a
  if (req.session.loggedIn) {
   res.render('addExpense');
-  return;
 }
 });
 
