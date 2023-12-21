@@ -46,3 +46,80 @@
   .hidden {
     display: none;
   }
+
+  
+
+  /* David's CSS */
+
+
+
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Light grey background */
+  color: #333; /* Text color */
+}
+
+/* Heading styles */
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 20px;
+  color: #007bff; /* Blue heading */
+}
+
+p {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #fff; /* White navbar background */
+  box-shadow: 0 4px 6px -6px #222; /* Navbar shadow */
+}
+
+.navbar a {
+  color: #333; /* Navbar link color */
+}
+
+.navbar a:hover {
+  color: #007bff; /* Hover color */
+}
+
+/* Main content styles */
+.container {
+  margin-top: 20px;
+  background-color: #fff; /* White container background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Container shadow */
+}
+
+/* Dropdown styles */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 6px -6px #222; /* Dropdown shadow */
+}
+
+.dropdown-item {
+  color: #333; /* Dropdown item color */
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; /* Hover background color */
+}
+
+/* Chart canvas styles */
+canvas {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+
