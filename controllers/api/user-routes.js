@@ -1,9 +1,9 @@
-const router = require('express').Router();
-const { User } = require('../../models');
-const withAuth = require('../../utils/auth');
+const router = require("express").Router();
+const { User } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 // login route for existing users
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: {
@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
     if (!dbUserData) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+        .json({ message: "Incorrect email or password. Please try again!" });
       return;
     }
 
@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+        .json({ message: "Incorrect email or password. Please try again!" });
       return;
     }
 
@@ -31,9 +31,7 @@ router.post('/login', async (req, res) => {
       req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
 
-      res
-        .status(200)
-        .json({ user: dbUserData, message: 'Login successful!' });
+      res.status(200).json({ user: dbUserData, message: "Login successful!" });
     });
   } catch (err) {
     console.log(err);
@@ -42,7 +40,7 @@ router.post('/login', async (req, res) => {
 });
 
 // route to create new user
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const dbUserData = await User.create({
       name: req.body.username,
@@ -51,7 +49,7 @@ router.post('/', async (req, res) => {
     });
 
     req.session.save(() => {
-      req.session.user_id = dbUserData.id
+      req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
 
       res.status(200).json(dbUserData);
@@ -63,26 +61,26 @@ router.post('/', async (req, res) => {
 });
 
 // get user's expenses
-router.get('/:id', withAuth, async (req, res) => {
+router.get("/:id", withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
-      attributes: { exclude: ['password'] },
+      attributes: { exclude: ["password"] },
       include: [
         {
-          model: Expense, 
-          attributes: [ 'date', 'category', 'amount' ]
-        }
-      ]
+          model: Expense,
+          attributes: ["date", "category", "amount"],
+        },
+      ],
     });
 
     const user = userData.get({ plain: true });
 
-    res.render('addExpense', {
+    res.render("addExpense", {
       ...user,
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json(err);
   }
 });
 

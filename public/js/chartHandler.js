@@ -11,7 +11,7 @@ let userMonthlyExpenses = {
   September: 0,
   October: 0,
   November: 0,
-  December: 0
+  December: 0,
 };
 
 // Function to add monthly expense for the user
@@ -24,38 +24,42 @@ function renderExpenseChart() {
   const currentPage = window.location.pathname; // Get the current page URL
 
   // Check if the current page is the home page
-  if (currentPage === '/') {
-    const ctx = document.getElementById('myChart');
+  if (currentPage === "/") {
+    const ctx = document.getElementById("myChart");
 
     // Create Chart instance
     new Chart(ctx, {
-      type: 'line',
+      type: "line",
       data: {
-        labels: ['January',
-         'February', 
-         'March', 
-         'April', 
-         'May', 
-         'June', 
-         'July', 
-         'August',
-          'September', 
-          'October',
-           'November', 
-           'December'],
-        datasets: [{
-          label: 'Amount Spent',
-          data: Object.values(userMonthlyExpenses),
-          borderWidth: 1
-        }]
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
+        datasets: [
+          {
+            label: "Amount Spent",
+            data: Object.values(userMonthlyExpenses),
+            borderWidth: 1,
+          },
+        ],
       },
       options: {
         scales: {
           y: {
-            beginAtZero: true
-          }
-        }
-      }
+            beginAtZero: true,
+          },
+        },
+      },
     });
   }
 }

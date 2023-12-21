@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class Expense extends Model {}
 
@@ -25,8 +25,8 @@ Expense.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
-        key: 'id',
+        model: "user",
+        key: "id",
       },
     },
   },
@@ -34,8 +34,8 @@ Expense.init(
     sequelize,
     underscored: true,
     timestamps: false,
-    modelName: 'expense'
-  }
+    modelName: "expense",
+  },
 );
-   
+
 module.exports = Expense;
