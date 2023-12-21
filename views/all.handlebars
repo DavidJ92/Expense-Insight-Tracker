@@ -1,11 +1,12 @@
-</div>
-  {{#each spendings as |spending|}}
-    <div class='dish col-md-5'>
+<div class="text-center">
+  <h2>{{user.name}}'s Expenses for the Year</h2>
+      <!-- Loop over each object in the projects array -->
+    {{#each expenses as |expense| }}
       <p>
-        {{format_date spending.date}}: 
-        {{spending.category}}, 
-        <strong>$ {{spending.amount}}</strong>
-        {{spending.user_id}}
+        {{format_date expense.date}}: 
+        {{expense.category}}, 
+        <strong>$ {{expense.amount}}</strong>
+        {{expense.user_id}}
       </p>
-    </div>
-  {{/each}}
+      {{/each}}
+</div>

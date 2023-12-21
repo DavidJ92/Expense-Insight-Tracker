@@ -1,21 +1,42 @@
 const router = require('express').Router();
-const { Expenses } = require('../models');
+const { Expense, User } = require('../models');
 const withAuth = require('../utils/auth');
 
-//if user is logged in, show spendings for the year
+//if user is logged in, show all expenses for the year
 router.get('/', withAuth, async (req, res) => {
   try {
-    const spendingData = await Expenses.findAll();
-    console.log(spendingData);
-    const spendings = spendingData.map((spending) => spending.get({ plain: true }));
-    console.log("here", spendings);
-         res.render('all', { spendings });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+  const expenseData = await Expense.findAll({
+    include: [
+      {
+        model: User,
+        attributes: { exclude: ['password'] },
+      }
+    ]
+  });
 
-//   Spending.findAll()
+  const expenses = expenseData.map((expense) => expense.get({ plain: true }));
+
+  res.render('all', {
+    expenses,
+    loggedIn: req.session.loggedIn,
+  });
+} catch (err) {
+  res.status(500).json(err);
+} 
+  
+  // try {
+  //   const spendingData = await Expense.findAll();
+  //   console.log(spendingData);
+  //   const spendings = spendingData.map((spending) => spending.get({ plain: true }));
+  //   console.log("here", spendings);
+  //        res.render('all', { spendings });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).json(err);
+  // }
+
+//another way to try the above arrow function with .then and .catch  
+//   Expense.findAll()
 //   .then((data)=>{
 //     console.log("THIS SI DATA = ",data)
 //     const spendings = data.map((spending) => spending.get({ plain: true }));
@@ -27,6 +48,17 @@ router.get('/', withAuth, async (req, res) => {
 // })
 
     });
+
+// GET home route
+router.get('/', (req, res) => {
+  // if user is logged in, redirects to homepage
+  if (req.session.loggedIn) {
+     res.redirect('/login');
+     return;
+  }
+  // else render login.handlebars
+  res.render('login');
+ });
 
 // GET login route
 router.get('/login', (req, res) => {
@@ -50,15 +82,22 @@ router.get('/signup', (req, res) => {
  res.render('signup');
 });
 
-// GET logout route
+// GET login route
 router.get('/logout', (req, res) => {
- // if user is logged out, redirects to logout page
- if (req.session.loggedOut) {
-  req.session.destroy(() => {
-     // else render logout.handlebars
-   res.render('logout');
-  });
- }
+  // if user is logged in, redirects to homepage
+  if (req.session.loggedIn) {
+  // else render logout.handlebars
+  res.render('logout');
+  }
+ });
+
+// GET add-expense route
+router.get('/add-expense', (req, res) => {
+ // if user is logged in, redirects to a
+ if (req.session.loggedIn) {
+  res.render('addExpense');
+  return;
+}
 });
 
 module.exports = router;

@@ -33,10 +33,7 @@ sequelize.sync({ force: false })
 .then(() => {
   app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}!`);
-<<<<<<< HEAD
     sequelize.sync({ force: true });
   });
-=======
+
   });  
-}) 
->>>>>>> 6a7214724f7625a33ddeef3cff02df7c20521773
