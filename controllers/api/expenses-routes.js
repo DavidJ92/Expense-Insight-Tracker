@@ -65,7 +65,7 @@ router.delete('/:id', withAuth, async (req, res) => {
 router.get('/latest', withAuth, async (req, res) => {
   try {
     const latestExpense = await Expense.findOne({
-      attributes: ['id', 'category', 'amount', 'date'],
+      attributes: ['id', 'category', 'amount', 'date' , 'description'],
       where: { user_id: req.session.user_id }, // Assuming user ID is stored in the session
       order: [['createdAt', 'DESC']], // Order by creation date in descending order
     });
