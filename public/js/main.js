@@ -1,4 +1,3 @@
-// Sample expense data (replace this with your logic to handle expenses)
 let expenses = []; // Array to store expenses
 
 // Function to render expenses
@@ -14,7 +13,7 @@ function renderExpenses() {
       <p>Date: ${expense.date}</p>
       <p>Amount: ${expense.amount}</p>
       <p>Category: ${expense.category}</p>
-      <p>Comment: ${expense.comment}</p>
+      <p>Description: ${expense.description}</p>
     `;
     expenseList.appendChild(expenseDiv);
   });
@@ -28,10 +27,10 @@ function handleExpenseFormSubmit(event) {
   const date = document.getElementById('expenseDate').value;
   const amount = document.getElementById('expenseAmount').value;
   const category = document.getElementById('expenseCategory').value;
-  const comment = document.getElementById('expenseComment').value;
+  const description = document.getElementById('expenseDescription').value;
   
   // Add the new expense to the expenses array
-  expenses.push({ title, date, amount, category, comment });
+  expenses.push({ title, date, amount, category, description});
   
   // Render expenses
   renderExpenses();
