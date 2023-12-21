@@ -61,4 +61,24 @@ router.delete('/:id', withAuth, async (req, res) => {
   };
 });
 
+// GET the latest added expense
+router.get('/latest', withAuth, async (req, res) => {
+  try {
+    const latestExpense = await Expense.findOne({
+      attributes: ['id', 'category', 'amount', 'date'],
+      where: { user_id: req.session.user_id }, // Assuming user ID is stored in the session
+      order: [['createdAt', 'DESC']], // Order by creation date in descending order
+    });
+
+    if (!latestExpense) {
+      return res.status(404).json({ message: 'No expenses found.' });
+    }
+
+    res.status(200).json(latestExpense);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to fetch the latest expense.' });
+  }
+});
+
 module.exports = router;
