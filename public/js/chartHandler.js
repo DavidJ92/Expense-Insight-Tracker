@@ -15,12 +15,12 @@ let userMonthlyExpenses = {
 };
 
 // Function to add monthly expense for the user
-function addMonthlyExpense(month, amount) {
+export function addMonthlyExpense(month, amount) {
   userMonthlyExpenses[month] = amount;
 }
 
 // Function to render the monthly expense chart
-function renderExpenseChart() {
+export function renderExpenseChart() {
   const currentPage = window.location.pathname; // Get the current page URL
 
   // Check if the current page is the home page
