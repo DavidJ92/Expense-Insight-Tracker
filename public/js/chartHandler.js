@@ -24,7 +24,7 @@ function renderExpenseChart() {
   const currentPage = window.location.pathname; // Get the current page URL
 
   // Check if the current page is the home page
-  if (currentPage === '/main.html') {
+  if (currentPage === '/') {
     const ctx = document.getElementById('myChart');
 
     // Create Chart instance
