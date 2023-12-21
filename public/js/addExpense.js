@@ -8,7 +8,7 @@ const addFormHandler = async (event) => {
   const description = document.querySelector('#description').value.trim();
 
   if (date && category && amount) {
-      const response = await fetch('/api/expenses/add', {
+      const response = await fetch('/api/expenses/add-expense', {
           method: 'POST',
           body: JSON.stringify({ date, category, amount }),
           headers: { 'Content-Type': 'application/json' },

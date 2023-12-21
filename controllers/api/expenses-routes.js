@@ -8,12 +8,12 @@ router.get('/add-expense', withAuth, async (req, res) => {
     const allExpenses = await Expense.findAll({
       include: [
         {
-          attributes: ['date', 'category', 'amount']
+          attributes: ['date', 'category', 'amount', 'description'],
         },
       ],
     });
 
-    res.render('addExpense', { loggedIn: req.session.loggedIn, allExpenses });
+    res.render('add-expense', { loggedIn: req.session.loggedIn, allExpenses });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Failed to load all expenses. Please try again.' });
