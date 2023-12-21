@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-// Login
+// login route for existing users
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
@@ -27,6 +28,7 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
+      req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
 
       res
@@ -39,7 +41,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-//create new user
+// route to create new user
 router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
@@ -60,7 +62,31 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Logout
+// get user's expenses
+router.get('/:id', withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: Expense, 
+          attributes: [ 'date', 'category', 'amount' ]
+        }
+      ]
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('addExpense', {
+      ...user,
+      loggedIn: req.session.loggedIn
+    });
+  } catch (err) {
+    res.status(500).json(err)
+  }
+});
+
+// Path to logout
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {

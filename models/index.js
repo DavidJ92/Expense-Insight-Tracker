@@ -1,19 +1,16 @@
+// model/index.js
 const User = require('./User');
-const Expenses = require('./Expenses');
+const Expense = require('./Expense');
 
-//a user can have many spending
-User.hasMany(Expenses, {
-    foreignKey: 'user_id',
+// A user can have many expenses
+User.hasMany(Expense, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 });
 
-//spending belongs to a single user
-Expenses.belongsTo(User, {
-    foreignKey: 'user_id',
-  });
+// An expense belongs to a single user
+Expense.belongsTo(User, {
+  foreignKey: 'user_id',
+});
 
-// //spending has one user
-// Spending.hasOne(User, {
-//     foreignKey: 'user_id',
-// });
-
-module.exports = { User, Expenses };
+module.exports = { User, Expense };
