@@ -63,4 +63,11 @@ const appendExpenseToList = (expense) => {
 fetchAndAppendExpense();
 
 // Event listener for form submission
-document.querySelector('.add-form').addEventListener('submit', addFormHandler);
+document.querySelector("#add-expense-btn").addEventListener("click", addFormHandler);
+
+
+//if see updated line chart btn is clicked, render the homepage
+const seeHomeBtn = document.querySelector("#see-home-btn");
+seeHomeBtn.addEventListener("click", function () {
+  window.location.href = "/";
+});
