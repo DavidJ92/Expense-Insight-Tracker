@@ -1,13 +1,13 @@
 const User = require('./User');
-const Spending = require('./spending');
+const Expenses = require('./Expenses');
 
 //a user can have many spending
-User.hasMany(Spending, {
+User.hasMany(Expenses, {
     foreignKey: 'user_id',
 });
 
 //spending belongs to a single user
-Spending.belongsTo(User, {
+Expenses.belongsTo(User, {
     foreignKey: 'user_id',
   });
 
@@ -16,4 +16,4 @@ Spending.belongsTo(User, {
 //     foreignKey: 'user_id',
 // });
 
-module.exports = { User, Spending };
+module.exports = { User, Expenses };

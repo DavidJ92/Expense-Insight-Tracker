@@ -12,7 +12,10 @@ const logout = async (event) => {
       alert('Failed to log out. Please try again.');
     }
   };
-  
+
   //listening on click
-  document.querySelector('#logout').addEventListener('click', logout);
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('#logout').addEventListener('click', logout);
+  })
+  
   
