@@ -51,4 +51,5 @@ const appendExpenseToList = (expense) => {
 };
 
 // Initially fetch and render the entire expense list on page load
-fetchAndRenderFullExpenseList();
+fetchAndAppendExpense();
+
