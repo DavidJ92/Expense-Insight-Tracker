@@ -5,19 +5,9 @@ const withAuth = require("../utils/auth");
 //if user is logged in, show all expenses for the year
 router.get("/", withAuth, async (req, res) => {
   try {
-    const expenseData = await Expense.findAll({
-      include: [
-        {
-          model: User,
-          attributes: { exclude: ["password"] },
-        },
-      ],
-    });
-
-    const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-
-    res.render("all", {
-      expenses,
+   
+    res.render("home", {
+     
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {

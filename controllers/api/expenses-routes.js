@@ -3,23 +3,13 @@ const { Expense } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // route to all added expenses
-router.get("/add-expense", withAuth, async (req, res) => {
-  try {
-    const allExpenses = await Expense.findAll({
-      include: [
-        {
-          attributes: ["date", "category", "amount"],
-        },
-      ],
-    });
-
-    res.render("add-expense", { loggedIn: req.session.loggedIn, allExpenses });
-  } catch (err) {
-    console.log(err);
-    res
-      .status(500)
-      .json({ message: "Failed to load all expenses. Please try again." });
-  }
+router.get("/", withAuth, async (req, res) => {
+  const expenseData = await Expense.findAll({
+    where: {
+      user_id: req.session.user_id,
+    },
+  });
+  res.json(expenseData);
 });
 
 // route to create/add a new expense using async/await
