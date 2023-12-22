@@ -1,5 +1,4 @@
 body {
-  background-image: url("main.webp");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -17,8 +16,15 @@ nav .container {
   font-size: 1.6rem;
 }
 
-div.container {
-  justify-content: center;
+form.form.login-form,
+form.form.signup-form {
+  padding-top: 2rem;
+  text-align-last: center;
+}
+
+div.card {
+  display: flex;
+  margin: 1rem;
 }
 
 section.in-card {

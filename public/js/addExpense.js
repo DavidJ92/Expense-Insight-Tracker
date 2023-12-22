@@ -68,7 +68,7 @@ function updateMonthlyExpenses(date, amount) {
   }
  };
  
- document.querySelector('.add-form').addEventListener('submit', addFormHandler);
+ document.querySelector("#add-expense-btn").addEventListener("click", addFormHandler);
  
  // Function to fetch the newly added expense and append it to the list
  const fetchAndAppendExpense = async () => {
@@ -92,3 +92,9 @@ function updateMonthlyExpenses(date, amount) {
        console.error('Error:', error);
   }
  };
+
+ //if see updated line chart btn is clicked, render the homepage
+const seeHomeBtn = document.querySelector("#see-home-btn");
+seeHomeBtn.addEventListener("click", function () {
+  window.location.href = '/';
+});
