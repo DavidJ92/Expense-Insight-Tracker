@@ -21,7 +21,8 @@ let userMonthlyExpenses = {
  
  // Function to render the monthly expense chart
  function renderExpenseChart() {
-  const currentPage = window.location.pathname; // Get the current page URL
+  const response = await fetch("/api/expenses");
+  console.log(response);
  
   // Check if the current page is the home page
   if (currentPage === '/') {
@@ -63,6 +64,9 @@ let userMonthlyExpenses = {
  // Call the function to render the chart
  renderExpenseChart();
 
+// Function to handle adding a new expense
+
+const 
 
 
  
