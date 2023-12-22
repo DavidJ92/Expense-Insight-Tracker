@@ -1,7 +1,7 @@
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 function generateSecretKey() {
-    return crypto.randomBytes(256).toString('hex');
+  return crypto.randomBytes(256).toString("hex");
 }
 
 console.log(generateSecretKey());

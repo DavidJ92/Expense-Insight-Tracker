@@ -1,86 +1,87 @@
-<!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Expense Insight Tracker</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Insight Tracker</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-<body>
-   <h1>Expense Insight Tracker</h1>
-    <p>An intuitive tool designed for comprehensive expense tracking and financial management.</p>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
-<canvas id="expense-chart"></canvas>
+  </head>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <!-- Add other navbar elements as needed -->
-      <ul class="navbar-nav ml-auto">
-         <!-- If user is logged in, show a logout button -->
-        {{#if loggedIn}}
-         <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
-        </li>    
-        <!-- Dropdown button for expenses -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Expenses
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/add-expense">Add Daily Expenses</a>
-            <a class="dropdown-item" href="/monthly-expenses">Monthly</a>
-          </div>
-        </li>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
-        </li>
-        {{else}}
-        {{!-- otherwise show login and sign up --}}
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/signup">Sign Up</a>
-        </li>
-       {{/if}}
-      </ul>
-    </div>
-  </nav>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container" id="nav-title">Expense Insight Tracker
+        <!-- Add other navbar elements as needed -->
+        <ul class="navbar-nav ml-auto">
+          <!-- If user is logged in, show these  -->
+          {{#if loggedIn}}
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/add-expense">Add Daily Expenses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          {{else}}
+            {{! otherwise show login and sign up }}
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">Sign Up</a>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </nav>
 
-  <!-- Main Content -->
- <main>
-  <div class="container mt-4">
-    <!-- Where the expenses will be displayed -->
-    <div id="expense-list"></div>
-     {{{body}}}
-  </div>
-</main>
+    <!-- Main Content -->
+    <main>
+      <div class="container">
+        <!-- Where the expenses will be displayed -->
+        <div id="expense-list"></div>
+        {{{body}}}
+      </div>
+    </main>
 
+    {{#if loggedIn}}
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      <!-- <canvas id="expense-chart"></canvas> -->
+    {{/if}}
 
+    <!-- Bootstrap JavaScript (jQuery and Popper.js dependencies are required) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
 
-<div>
-    <canvas id="myChart"></canvas>
-</div>
+    <!-- Handlebars (make sure to include the library) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"
+    ></script>
 
-  <!-- Bootstrap JavaScript (jQuery and Popper.js dependencies are required) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Your Custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/chartHandler.js"></script>
+    <script src="/js/main.js"></script>
 
-  <!-- Handlebars (make sure to include the library) -->
-  <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-
-  <!-- Your Custom JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="/js/chartHandler.js"></script>
-  <script src="/js/main.js"></script>
-
-</body>
+  </body>
 </html>

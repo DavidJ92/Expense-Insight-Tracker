@@ -1,46 +1,23 @@
-<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Spending Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <canvas id="myChart"></canvas>
     <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Spending',
-                    data: {{spendingHistory}},
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    clickedDot: [],
-                    onClick: function(e, legendItem) {
-                        var index = legendItem.datasetIndex;
-                        var dataSet = this.data.datasets[index];
-                        var clickedIndex = dataSet.clickedDot.indexOf(e.element.index);
-
-                        if (clickedIndex === -1) {
-                            dataSet.clickedDot.push(e.element.index);
-                        } else {
-                            dataSet.clickedDot.splice(clickedIndex, 1);
-                        }
-
-                        this.update();
-                    }
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+      const ctx = document.getElementById('myChart').getContext('2d'); const
+      myChart = new Chart(ctx, { type: 'line', data: { labels: ['Jan', 'Feb',
+      'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      datasets: [{ label: 'Spending', data:
+      {{spendingHistory}}, borderColor: 'rgba(75, 192, 192, 1)',
+      backgroundColor: 'rgba(75, 192, 192, 0.2)', clickedDot: [], onClick:
+      function(e, legendItem) { var index = legendItem.datasetIndex; var dataSet
+      = this.data.datasets[index]; var clickedIndex =
+      dataSet.clickedDot.indexOf(e.element.index); if (clickedIndex === -1) {
+      dataSet.clickedDot.push(e.element.index); } else {
+      dataSet.clickedDot.splice(clickedIndex, 1); } this.update(); } }] },
+      options: { scales: { y: { beginAtZero: true } } } });
     </script>
-</body>
+  </body>
 </html>
