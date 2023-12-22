@@ -62,3 +62,7 @@ let userMonthlyExpenses = {
  
  // Call the function to render the chart
  renderExpenseChart();
+
+
+
+ 
