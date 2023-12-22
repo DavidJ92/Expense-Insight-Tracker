@@ -8,7 +8,7 @@ router.get("/add-expense", withAuth, async (req, res) => {
     const allExpenses = await Expense.findAll({
       include: [
         {
-          attributes: ["date", "category", "amount", "description"],
+          attributes: ["date", "category", "amount"],
         },
       ],
     });
@@ -67,7 +67,7 @@ router.delete("/:id", withAuth, async (req, res) => {
 router.get("/latest", withAuth, async (req, res) => {
   try {
     const latestExpense = await Expense.findOne({
-      attributes: ["id", "category", "amount", "date", "description"],
+      attributes: ["id", "category", "amount", "date"],
       where: { user_id: req.session.user_id }, // Assuming user ID is stored in the session
       order: [["createdAt", "DESC"]], // Order by creation date in descending order
     });
