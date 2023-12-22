@@ -18,7 +18,15 @@ const monthNumberMap = {
   'January': 500,
   'February': 750,
   'March': 600,
-  // ... other months
+  'April': 1000,
+  'May': 1200,
+  'June': 900,
+  'July': 1100,
+  'August': 800,
+  'September': 1050,
+  'October': 0,
+  'November': 0,
+  'December': 0
  };
  
  // Function to render the chart
