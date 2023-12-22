@@ -1,42 +1,64 @@
-// chartHandler.js
-
-// User's monthly expenses data
+// User's monthly expenses data (replace this with the user's logic)
 let userMonthlyExpenses = {
-  January: 200,
-  February: 300,
-  March: 400,
-  April: 500,
-  May: 600,
-  June: 700,
-  July: 800,
-  August: 900,
-  September: 1000,
-  October: 1100,
-  November: 1200,
-  December: 1300
+  January: 0,
+  February: 0,
+  March: 0,
+  April: 0,
+  May: 0,
+  June: 0,
+  July: 0,
+  August: 0,
+  September: 0,
+  October: 0,
+  November: 0,
+  December: 0
 };
 
-// Function to render the monthly expense chart
-document.addEventListener('DOMContentLoaded', function() {
-  const ctx = document.getElementById('myChart').getContext('2d');
+// Function to add monthly expense for the user
+function addMonthlyExpense(month, amount) {
+  userMonthlyExpenses[month] = amount;
+}
 
-  // Create Chart instance
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: Object.keys(userMonthlyExpenses), // Use the months as labels
-      datasets: [{
-        label: 'Amount Spent',
-        data: Object.values(userMonthlyExpenses), // Use the expense amounts as data
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+// Function to render the monthly expense chart
+function renderExpenseChart() {
+  const currentPage = window.location.pathname; // Get the current page URL
+
+  // Check if the current page is the home page
+  if (currentPage === '/') {
+    const ctx = document.getElementById('myChart');
+
+    // Create Chart instance
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['January',
+         'February', 
+         'March', 
+         'April', 
+         'May', 
+         'June', 
+         'July', 
+         'August',
+          'September', 
+          'October',
+           'November', 
+           'December'],
+        datasets: [{
+          label: 'Amount Spent',
+          data: Object.values(userMonthlyExpenses),
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
-});
+    });
+  }
+}
+
+// Call the function to render the chart
+renderExpenseChart();
