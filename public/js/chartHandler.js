@@ -20,7 +20,7 @@ let userMonthlyExpenses = {
  }
  
  // Function to render the monthly expense chart
- function renderExpenseChart() {
+ async function renderExpenseChart() {
   const response = await fetch("/api/expenses");
   console.log(response);
  
