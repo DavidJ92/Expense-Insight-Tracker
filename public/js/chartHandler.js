@@ -1,67 +1,4 @@
-// User's monthly expenses data (replace this with the user's logic)
-// let userMonthlyExpenses = {
-//   January: 0,
-//   February: 0,
-//   March: 0,
-//   April: 0,
-//   May: 0,
-//   June: 0,
-//   July: 0,
-//   August: 0,
-//   September: 0,
-//   October: 0,
-//   November: 0,
-//   December: 0
-//  };
- 
- // Function to add monthly expense for the user
-//  function addMonthlyExpense(month, amount) {
-//   userMonthlyExpenses[month] = amount;
-//  }
- 
-
- // Function to render the monthly expense chart
-//  async function renderExpenseChart() {
-//   const response = await fetch("/api/expenses");
-//   console.log(response);
- 
-//   // Check if the current page is the home page
-//   if (currentPage === '/') {
-     const ctx = document.getElementById('myChart').getContext('2d');
- 
-//      // Create Chart instance
-//      new Chart(ctx, {
-//        type: 'line',
-//        data: {
-//          labels: ['January',
-//           'February', 
-//           'March', 
-//           'April', 
-//           'May', 
-//           'June', 
-//           'July', 
-//           'August',
-//            'September', 
-//            'October',
-//             'November', 
-//             'December'],
-//          datasets: [{
-//            label: 'Amount Spent',
-//            data: Object.values(userMonthlyExpenses),
-//            borderWidth: 1
-//          }]
-//        },
-//        options: {
-//          scales: {
-//            y: {
-//              beginAtZero: true
-//            }
-//          }
-//        }
-//      });
-//   }
-//  }
-
+// Chart data
 const monthNumberMap = {
   'January': 1,
   'February': 2,
@@ -75,60 +12,68 @@ const monthNumberMap = {
   'October': 10,
   'November': 11,
   'December': 12
-};
-
-const userMonthlyExpenses = {
+ };
+ 
+ const userMonthlyExpenses = {
   'January': 500,
   'February': 750,
   'March': 600,
   // ... other months
-};
-
-// Assuming userMonthlyExpenses is an object with keys as month names and values as amounts
-const monthLabels = Object.keys(userMonthlyExpenses);
-const monthNumbers = monthLabels.map(month => monthNumberMap[month]);
-
-// Create Chart instance
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: monthLabels,
-    datasets: [{
-      label: 'Amount Spent',
-      data: Object.values(userMonthlyExpenses),
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
+ };
+ 
+ // Function to render the chart
+ function renderExpenseChart() {
+  const ctx = document.getElementById('myChart').getContext('2d'); 
+ 
+  // Assuming userMonthlyExpenses is an object with keys as month names and values as amounts
+  const monthLabels = Object.keys(userMonthlyExpenses);
+  const monthNumbers = monthLabels.map(month => monthNumberMap[month]);
+ 
+  // Create Chart instance
+  new Chart(ctx, {
+     type: 'line',
+     data: {
+       labels: monthLabels,
+       datasets: [{
+         label: 'Amount Spent',
+         data: Object.values(userMonthlyExpenses),
+         borderWidth: 1
+       }]
+     },
+     options: {
+       scales: {
+         y: {
+           beginAtZero: true
+         }
+       }
+     }
+  });
+ }
+ 
+ // Function to add a new expense
+ function addExpense(date, amount) {
+  const monthName = new Date(date).toLocaleString('default', { month: 'long' });
+  if (userMonthlyExpenses[monthName]) {
+     userMonthlyExpenses[monthName] += amount;
+  } else {
+     userMonthlyExpenses[monthName] = amount;
   }
-});
-
-function getAmountSpentForMonth(expenseArr, inputDate) {
-  const targetMonth = inputDate.getMonth() + 1; // Month is 0-indexed, so add 1
-  const expensesForMonth = expenseArr.filter(exp => exp.date.getMonth() + 1 === targetMonth);
-
-  // Calculate the total amount spent for the month
-  const totalAmountSpent = expensesForMonth.reduce((total, exp) => total + exp.amount, 0);
-
-  return totalAmountSpent;
-}
-
-// Example usage:
-const inputDate = new Date('2023-01-25');
-const amountSpentForMonth = getAmountSpentForMonth(expenses, inputDate);
-console.log(`Amount spent in ${inputDate.toLocaleString('en-US', { month: 'long' })}: $${amountSpentForMonth}`);
-
  
- // Call the function to render the chart
- renderExpenseChart();
-
-// Function to handle adding a new expense
-
-
-
+  renderExpenseChart();
+ }
  
+ // Example usage:
+ const newExpenseDate = new Date('2023-02-25');
+ const newExpenseAmount = 150;
+ addExpense(newExpenseDate, newExpenseAmount);
+ 
+ // Function to handle adding a new expense
+ 
+ function addNewExpense() {
+  const date = new Date(prompt('Enter the date of the expense (format: YYYY-MM-DD):'));
+  const amount = parseFloat(prompt('Enter the amount of the expense:'));
+  addExpense(date, amount);
+ }
+ 
+ // Example usage:
+ addNewExpense();
