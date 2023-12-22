@@ -57,31 +57,15 @@ const monthNumberMap = {
      }
   });
  }
- 
- // Function to add a new expense
- function addExpense(date, amount) {
-  const monthName = new Date(date).toLocaleString('default', { month: 'long' });
-  if (userMonthlyExpenses[monthName]) {
-     userMonthlyExpenses[monthName] += amount;
-  } else {
-     userMonthlyExpenses[monthName] = amount;
-  }
- 
-  renderExpenseChart();
- }
- 
- // Example usage:
- const newExpenseDate = new Date('2023-02-25');
- const newExpenseAmount = 150;
- addExpense(newExpenseDate, newExpenseAmount);
- 
- // Function to handle adding a new expense
- 
- function addNewExpense() {
-  const date = new Date(prompt('Enter the date of the expense (format: YYYY-MM-DD):'));
-  const amount = parseFloat(prompt('Enter the amount of the expense:'));
-  addExpense(date, amount);
- }
- 
- // Example usage:
- addNewExpense();
+
+  // Function to add a new expense
+  function addExpense(date, amount) {
+    const monthName = new Date(date).toLocaleString('default', { month: 'long' });
+    if (userMonthlyExpenses[monthName]) {
+       userMonthlyExpenses[monthName] += amount;
+    } else {
+       userMonthlyExpenses[monthName] = amount;
+    }
+   
+    renderExpenseChart();
+   }
