@@ -34,8 +34,8 @@ section.in-card {
 }
 
 main {
-  position: absolute;
-  top: 45%;
+  flex-wrap: wrap;
+  display: inline-flex;
 }
 
 .login-card {
