@@ -76,6 +76,11 @@ p {
   box-shadow: 0 4px 6px -6px #222; /* Navbar shadow */
 }
 
+.list-details {
+  flex-wrap: wrap;
+  display: inline-flex;
+}
+
 .navbar a {
   color: #333; /* Navbar link color */
 }

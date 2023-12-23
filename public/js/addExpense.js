@@ -1,14 +1,11 @@
 // flatpickr
 document.addEventListener("DOMContentLoaded", function () {
   flatpickr("#dateInput", {
-    dateFormat: "F j, Y", // Set the desired date format
-    enableTime: false,   // Disable time selection if not needed
-    altInput: true,      // Use an alternate input field for display
-    altFormat: "F j, Y", // Format for the alternate input field
-    onChange: function(selectedDates, dateStr, instance) {
+    dateFormat: "F j, Y",
+    onChange: function (selectedDates, dateStr, instance) {
       // Update the hidden input with the selected date
       document.getElementById("date").value = dateStr;
-    }
+    },
   });
 });
 
@@ -18,105 +15,154 @@ document.addEventListener("DOMContentLoaded", function () {
   var expenses = loadExpenses();
 
   // event listener for add-expense-btn click
-  document.getElementById("add-expense-btn").addEventListener("click", function () {
-    addExpense();
-  });
+  document
+    .getElementById("add-expense-btn")
+    .addEventListener("click", function () {
+      addExpense();
+    });
 
   // function to add an expense to the list
   function addExpense() {
-    // Get user input values
+    // get user input values
     var date = document.getElementById("dateInput").value;
     var category = document.getElementById("categoryInput").value;
     var amount = document.getElementById("amountInput").value;
 
-    // error shows if no date is selected
-  if (!date.trim()) {
-    alert("Please select a date."); // Display an error alert
-    return; // Stop execution if the date is empty
-  }
-  
-    // error shows if no amount is entered
-    if (!amount.trim()) {
-      alert("Please enter an amount."); // Display an error alert
-      return; // Stop execution if the amount is empty
+    // show if no date is selected
+    if (!date.trim()) {
+      alert("Please select a date.");
+      return;
     }
 
-    // Create an object representing the expense
+    // show error if no amount is entered
+    if (!amount.trim()) {
+      alert("Please enter an amount.");
+      return;
+    }
+
+    // expense object
     var expense = {
       date: date,
       category: category,
-      amount: amount
+      amount: amount,
     };
 
-    // Add the expense object to the expenses array
     expenses.push(expense);
-
-    // Save expenses to localStorage
     saveExpenses(expenses);
-
-    // Update the HTML list with the new expense
     updateExpenseList();
   }
 
-  // Function to update the HTML list with expenses
+  // function to update expense list
   function updateExpenseList() {
     var expenseList = document.getElementById("expenseList");
-    expenseList.innerHTML = ""; // Clear existing list
+    expenseList.innerHTML = "";
 
-    // Loop through the expenses array and create list items
+    var totalAmount = 0;
+    var monthData = {};
+
+    // loop through the expenses array and create list items
     for (var i = 0; i < expenses.length; i++) {
       var expenseItem = document.createElement("li");
       expenseItem.textContent = `${expenses[i].date} - ${expenses[i].category}: $${expenses[i].amount}`;
 
-      // Create a delete button for each expense
+      // extract amount from each user input
+      var amount = parseFloat(expenses[i].amount);
+
+      // Update aggregated data
+      totalAmount += amount;
+
+      // extract month and year only from each user input
+      var expenseDate = new Date(expenses[i].date);
+      var expenseMonth = expenseDate.getMonth() + 1; // 0-based month so +1 needed
+      var expenseYear = expenseDate.getFullYear();
+
+      // Update month-wise data
+      var monthKey = `${expenseYear}-${expenseMonth}`;
+      if (monthData[monthKey]) {
+        monthData[monthKey].total += amount;
+        monthData[monthKey].expenses.push(expenses[i]);
+      } else {
+        monthData[monthKey] = {
+          total: amount,
+          expenses: [expenses[i]],
+        };
+      }
+
+      // create a delete button for each expense
       var deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
-      deleteButton.onclick = createDeleteHandler(i); // Create a closure to capture the current index
+      deleteButton.onclick = createDeleteHandler(i);
 
-      // Append the delete button to the list item
+      // append delete button to each daily expenses
       expenseItem.appendChild(deleteButton);
 
-      // Append the list item to the expenseList
+      // append the daily expenses to the expenseList
       expenseList.appendChild(expenseItem);
     }
+
+    // store total daily expenses by month
+    var monthlyTotals = Object.keys(monthData).map(function (key) {
+      return { month: key, total: monthData[key].total };
+    });
+
+    console.log("Monthly Totals:", monthlyTotals);
+
+    var totalMonthList = document.getElementById("totalMonthList");
+    totalMonthList.innerHTML = ""; // replace totalMonthList with the new totalMonthList
+
+    // loop through the monthlyTotals and create list items for montly expenses
+    monthlyTotals.forEach(function (monthlyTotal) {
+      var totalItem = document.createElement("li");
+
+      var [year, month] = monthlyTotal.month.split("-");
+      var monthDate = new Date(year, parseInt(month) - 1); // adjust back to 0-based month
+
+      // format date as "Month Year"
+      var formattedDate = monthDate.toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric",
+      });
+
+      totalItem.textContent = `Total Amount for ${formattedDate}: $${monthlyTotal.total}`;
+
+      // append  to the totalsList
+      totalMonthList.appendChild(totalItem);
+    });
   }
 
-  // Function to handle the delete button click for a specific index
+  // function to delete daily expenses
   function createDeleteHandler(index) {
     return function () {
-      // Remove the expense at the specified index
       expenses.splice(index, 1);
 
-      // Save the updated expenses to localStorage
       saveExpenses(expenses);
 
-      // Update the HTML list with the new expense
       updateExpenseList();
+
+      updateChart();
     };
   }
 
-  // Function to save expenses to localStorage
+  // function to save expenses to localStorage
   function saveExpenses(expenses) {
     localStorage.setItem("expenses", JSON.stringify(expenses));
   }
 
-  // Function to load expenses from localStorage
+  // function to load expenses from localStorage
   function loadExpenses() {
     var storedExpenses = localStorage.getItem("expenses");
     return storedExpenses ? JSON.parse(storedExpenses) : [];
   }
 
-  // Load expenses when the page loads
+  // load expenses when the page loads
   updateExpenseList();
 });
 
- // if see updated line chart btn is clicked, render the homepage
- const seeHomeBtn = document.querySelector("#see-home-btn");
- seeHomeBtn.addEventListener("click", function () {
-   window.location.href = '/';
- });
-
-
+// if btn is clicked, render the homepage
+const seeHomeBtn = document.querySelector("#see-home-btn");
+seeHomeBtn.addEventListener("click", function () {
+  window.location.href = "/";
+});
 
 
 

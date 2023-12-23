@@ -1,56 +1,51 @@
 <div class="expense-container">
-  {{! adding expenses }}
   <div>
-  <label for="date">Date: </label>
-<input type="text" id="dateInput" placeholder="Select date" data-input/>
-<input type="hidden" id="date" name="date"/>
+    <label for="date">Date: </label>
+    <input type="text" id="dateInput" placeholder="Select date" data-input />
+    <input type="hidden" id="date" name="date" />
 
-
-        <label for="category">Category: </label>
-        <select id="categoryInput" name="category">
-          <option value="Personal Spending">Personal Spending</option>
-          <option value="Travel">Travel</option>
-          <option value="Miscellaneous">Miscellaneous</option>a
-          <option value="Bills & Utilities">Bills &amp; Utilities</option>
-          <option value="Restaurants">Restaurants</option>
-          <option value="Loan Payments">Loan Payments</option>
-          <option value="Groceries">Groceries</option>
-        </select>
-</div>
-  
-        <label for="amount">Amount: <strong>$ </strong></label>
-  <input type="text" id="amountInput" placeholder="00.00">
-
-
-          <div class="form-group">
-            <button class="btn" type="button" id="add-expense-btn">Add to List</button>
-            <!-- Changed type to "button" to prevent default form submission -->
-          </div>
-        </form>
-      </div>
-    </form>
-
+    <label for="category">Category: </label>
+    <select id="categoryInput" name="category">
+      <option value="Personal Spending">Personal Spending</option>
+      <option value="Travel">Travel</option>
+      <option value="Miscellaneous">Miscellaneous</option>a
+      <option value="Bills & Utilities">Bills &amp; Utilities</option>
+      <option value="Restaurants">Restaurants</option>
+      <option value="Loan Payments">Loan Payments</option>
+      <option value="Groceries">Groceries</option>
+    </select>
   </div>
 
-  {{! adding expenses }}
- <div class="list-details">
-    <h2 class="list-title">List</h2>
-    <ul id="expenseList">
-      <!-- List items will be dynamically added here -->
-    </ul>
-    <form class="form list-form">
-      <!-- ... your existing form fields ... -->
-    </form>
-  </div>
-    <div class="form-group">
-    <button class="btn" type="button" id="save-btn">Save</button>
-  </div>
-
+  <label for="amount">Amount: <strong>$ </strong></label>
+  <input type="text" id="amountInput" placeholder="00.00" />
 
   <div class="form-group">
-    <button class="btn" type="button" id="see-home-btn">Go Back to Line Chart</button>
+    <button class="btn" type="button" id="add-expense-btn">Add to List</button>
   </div>
 
+</div>
+
+<div class="list-details">
+  <!-- daily expenses container -->
+  <div class="expense-details">
+    <h2 class="list-title">Daily Expenses</h2>
+    <ul id="expenseList">
+      <!-- list of added expenses -->
+    </ul>
+    <form class="form list-form"></form>
+  </div>
+
+  <div class="total-details">
+    <h2 class="list-title">Monthly Expenses</h2>
+    <ul id="totalMonthList">
+      <!-- list of total expenses per month -->
+    </ul>
+    <button class="btn" type="button" id="save-btn">Save</button>
+  </div>
+</div>
+
+<div class="form-group">
+  <button class="btn" type="button" id="see-home-btn">Go Back to Line Chart</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
