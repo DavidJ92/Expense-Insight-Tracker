@@ -1,64 +1,27 @@
 <div class="expense-container">
-
   {{! adding expenses }}
-  <div class="expense-details">
-    <h2 class="expense-title">Add Expenses</h2>
-    <form class="form add-form">
-      <div class="form-group">
-        <label for="date">Date: </label>
-        <input class="form-input" type="text" id="date" />
-      </div>
-      <div class="form-group">
+  <div>
+  <label for="date">Date: </label>
+<input type="text" id="dateInput" placeholder="Select date" data-input/>
+<input type="hidden" id="date" name="date"/>
+
+
         <label for="category">Category: </label>
-        <select id="categories" name="categories">
+        <select id="categoryInput" name="category">
           <option value="Personal Spending">Personal Spending</option>
           <option value="Travel">Travel</option>
-          <option value="Miscellaneous">Miscellaneous</option>
+          <option value="Miscellaneous">Miscellaneous</option>a
           <option value="Bills & Utilities">Bills &amp; Utilities</option>
           <option value="Restaurants">Restaurants</option>
           <option value="Loan Payments">Loan Payments</option>
           <option value="Groceries">Groceries</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Charity">Charity</option>
-          <option value="Business Expenses">Business Expenses</option>
-          <option value="Education">Education</option>
-          <option value="Gifts">Gifts</option>
-          <option value="Insurance">Insurance</option>
-          <option value="Investments">Investments</option>
-          <option value="Taxes">Taxes</option>
-          <option value="Fees & Charges">Fees &amp; Charges</option>
-          <option value="Kids">Kids</option>
-          <option value="Pets">Pets</option>
-          <option value="Electronics & Software">Electronics &amp; Software</option>
-          <option value="Books">Books</option>
-          <option value="Office Supplies">Office Supplies</option>
-          <option value="Sports">Sports</option>
-          <option value="Music">Music</option>
-          <option value="Subscriptions">Subscriptions</option>
-          <option value="Home Improvement">Home Improvement</option>
-          <option value="Personal Care">Personal Care</option>
-          <option value="Beauty">Beauty</option>
-          <option value="Baby Supplies">Baby Supplies</option>
-          <option value="Tools">Tools</option>
-          <option value="Alcohol & Bars">Alcohol &amp; Bars</option>
-          <option value="Coffee Shops">Coffee Shops</option>
-          <option value="Gym">Gym</option>
-          <option value="Sports">Sports</option>
-          <option value="Pharmacy">Pharmacy</option>
-          <option value="Hospital">Hospital</option>
-          <option value="Automobile">Automobile</option>
-          <option value="Housing">Housing</option>
-          <option value="Health & Fitness">Health &amp; Fitness</option>
-          <option value="Transportation">Transportation</option>
-          <option value="Travel">Travel</option>
         </select>
-      </div>
-      <div class="form-group">
+</div>
+  
         <label for="amount">Amount: <strong>$ </strong></label>
-        <input class="form-input" type="text" id="amount" />
-      </div>
-          <!-- ... existing form fields ... -->
+  <input type="text" id="amountInput" placeholder="00.00">
+
+
           <div class="form-group">
             <button class="btn" type="button" id="add-expense-btn">Add to List</button>
             <!-- Changed type to "button" to prevent default form submission -->
@@ -70,23 +33,22 @@
   </div>
 
   {{! adding expenses }}
-  <div class="list-details">
+ <div class="list-details">
     <h2 class="list-title">List</h2>
+    <ul id="expenseList">
+      <!-- List items will be dynamically added here -->
+    </ul>
     <form class="form list-form">
-      <div class="form-group">
-        <ul>
-          <li></li>
-        </ul>
-      </div>
-      <div class="form-group">
-        <button class="btn" type="button" id="save-btn">Save</button>
-      </div>
+      <!-- ... your existing form fields ... -->
     </form>
   </div>
+    <div class="form-group">
+    <button class="btn" type="button" id="save-btn">Save</button>
+  </div>
+
 
   <div class="form-group">
-    <button class="btn" type="button" id="see-home-btn">See Updated Line Chart
-      Expense</button>
+    <button class="btn" type="button" id="see-home-btn">Go Back to Line Chart</button>
   </div>
 
 </div>

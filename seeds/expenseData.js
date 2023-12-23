@@ -3,7 +3,7 @@ const { Expense } = require("../models");
 const expenseData = [
   {
     date: "12/1/23",
-    category: "Personal Spending",
+    category: "month",
     amount: "43.50",
     user_id: 1,
   },
