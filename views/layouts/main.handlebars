@@ -15,70 +15,76 @@
     />
 
     <!-- flat -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
 
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 
   </head>
 
   <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container" id="nav-title">Expense Insight Tracker
-      <!-- Add other navbar elements as needed -->
-      <ul class="navbar-nav ml-auto">
-        <!-- If user is logged in, show these -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container" id="nav-title">Expense Insight Tracker
+        <!-- Add other navbar elements as needed -->
+        <ul class="navbar-nav ml-auto">
+          <!-- If user is logged in, show these -->
+          {{#if loggedIn}}
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/add-expense">Add Daily Expenses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          {{else}}
+            {{! otherwise show login and sign up }}
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">Sign Up</a>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <div>
+        {{{body}}}
+
         {{#if loggedIn}}
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/add-expense">Add Daily Expenses</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        {{else}}
-          {{! otherwise show login and sign up }}
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">Sign Up</a>
-          </li>
+          <div>
+            <canvas id="myChart"></canvas>
+          </div>
+
         {{/if}}
-      </ul>
-    </div>
-  </nav>
+      </div>
+    </main>
 
-  <!-- Main Content -->
-  <main>
-    <div>
-      <!-- Where the expenses will be displayed -->
-      <div id="expense-list"></div>
-      <div class="info-card"></div>
-      {{{body}}}
-    </div>
-  </main>
+    <!-- Bootstrap JavaScript (jQuery and Popper.js dependencies are required) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
 
-  {{#if loggedIn}}
-    <div>
-      <canvas id="myChart"></canvas>
-    </div>
-    <!-- <canvas id="expense-chart"></canvas> -->
-  {{/if}}
+    <!-- Handlebars (make sure to include the library) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"
+    ></script>
 
-  <!-- Bootstrap JavaScript (jQuery and Popper.js dependencies are required) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <!-- Handlebars (make sure to include the library) -->
-  <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-
-  <!-- Your Custom JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="/js/main.js"></script>
-</body>
+    <!-- Your Custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
 </html>
