@@ -16,11 +16,7 @@ nav .container {
   font-size: 1.6rem;
 }
 
-form.form.login-form,
-form.form.signup-form {
-  padding-top: 2rem;
-  text-align-last: center;
-}
+
 
 div.card {
   display: flex;
@@ -67,7 +63,11 @@ h1 {
 p {
   font-size: 1.1rem;
   text-align: center;
-  margin-bottom: 40px;
+  margin-top: 10%;
+}
+
+label {
+  text-align: left;
 }
 
 /* Navbar styles */
@@ -107,11 +107,51 @@ canvas {
   width: 600px; /* Set a specific width for the chart */
 }
 
+h2 {
+  text-align: center;
+}
+
+div.card {
+  background-color: #054FB7;
+  color: #fff;
+}
+
+.main-body {
+  position: fixed;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+}
+
+.btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #101dd3;
+  border-radius: 0.6em;
+  color: #101dd3;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.btn:hover {
+  background-color: #101dd3;
+  color: #fff;
+}
+
 .hidden {
   display: none;
 }
 
-div.in-card- {
-  background-color: #fff;
+.in-card {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  box-shadow: 3px 3px 3px black;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
