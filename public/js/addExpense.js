@@ -1,4 +1,4 @@
-// flatpickr
+// flatpickr to pick date
 document.addEventListener("DOMContentLoaded", function () {
   flatpickr("#dateInput", {
     dateFormat: "F j, Y",
@@ -9,9 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// adding expenses and appending to list
+// adding expenses and appending to daily expenses list and monthly expenses list
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize an array to store expenses
   var expenses = loadExpenses();
 
   // event listener for add-expense-btn click
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       addExpense();
     });
 
-  // function to add an expense to the list
+  // function to add an expense to the 'Daily Expenses' list
   function addExpense() {
     // get user input values
     var date = document.getElementById("dateInput").value;
@@ -29,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var amount = document.getElementById("amountInput").value;
 
     // show if no date is selected
-    if (!date.trim()) {
+    if (!date) {
       alert("Please select a date.");
       return;
     }
@@ -40,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // expense object
+    // daily expense object
     var expense = {
       date: date,
       category: category,
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateExpenseList();
   }
 
-  // function to update expense list
+  // function to update daily expense list
   function updateExpenseList() {
     var expenseList = document.getElementById("expenseList");
     expenseList.innerHTML = "";
@@ -60,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var totalAmount = 0;
     var monthData = {};
 
-    // loop through the expenses array and create list items
+    // loop through the daily expenses array and create list items
     for (var i = 0; i < expenses.length; i++) {
       var expenseItem = document.createElement("li");
       expenseItem.textContent = `${expenses[i].date} - ${expenses[i].category}: $${expenses[i].amount}`;
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // extract amount from each user input
       var amount = parseFloat(expenses[i].amount);
 
-      // Update aggregated data
+      // update aggregated data
       totalAmount += amount;
 
       // extract month and year only from each user input
@@ -76,11 +75,13 @@ document.addEventListener("DOMContentLoaded", function () {
       var expenseMonth = expenseDate.getMonth() + 1; // 0-based month so +1 needed
       var expenseYear = expenseDate.getFullYear();
 
-      // Update month-wise data
-      var monthKey = `${expenseYear}-${expenseMonth}`;
+      // update aggregated data for a specific month
+      var monthKey = `${expenseMonth}-${expenseYear}`;
+      // if month already exists, add amount to that month
       if (monthData[monthKey]) {
         monthData[monthKey].total += amount;
         monthData[monthKey].expenses.push(expenses[i]);
+      // if month doesn't exist yet on the 'Monthly Expenses' list, create a new list with that new month
       } else {
         monthData[monthKey] = {
           total: amount,
@@ -104,13 +105,12 @@ document.addEventListener("DOMContentLoaded", function () {
     var monthlyTotals = Object.keys(monthData).map(function (key) {
       return { month: key, total: monthData[key].total };
     });
-
     console.log("Monthly Totals:", monthlyTotals);
 
     var totalMonthList = document.getElementById("totalMonthList");
     totalMonthList.innerHTML = ""; // replace totalMonthList with the new totalMonthList
 
-    // loop through the monthlyTotals and create list items for montly expenses
+    // loop through the monthlyTotals and create list items for 'Monthly Expenses' list
     monthlyTotals.forEach(function (monthlyTotal) {
       var totalItem = document.createElement("li");
 
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       totalItem.textContent = `Total Amount for ${formattedDate}: $${monthlyTotal.total}`;
 
-      // append  to the totalsList
+      // append to the totalsList
       totalMonthList.appendChild(totalItem);
     });
   }
@@ -164,29 +164,25 @@ seeHomeBtn.addEventListener("click", function () {
   window.location.href = "/";
 });
 
-
-
-
-
 //  // Function to update the monthly expenses array
 // function updateMonthlyExpenses(date, amount) {
 //   const month = date.slice(0, 7); // Extract the month from the date
- 
+
 //   if (userMonthlyExpenses[month]) {
 //      userMonthlyExpenses[month] += parseFloat(amount);
 //   } else {
 //      userMonthlyExpenses[month] = parseFloat(amount);
 //   }
 //  }
- 
+
 //  // Function to render the monthly expense chart
 //  function renderExpenseChart() {
 //   const currentPage = window.location.pathname; // Get the current page URL
- 
+
 //   // Check if the current page is the home page
 //   if (currentPage === '/') {
 //      const ctx = document.getElementById('myChart').getContext('2d');
- 
+
 //      // Create Chart instance
 //      new Chart(ctx, {
 //        type: 'line',
@@ -208,26 +204,26 @@ seeHomeBtn.addEventListener("click", function () {
 //      });
 //   }
 //  }
- 
+
 //  // Call the function to render the chart initially
 //  renderExpenseChart();
- 
+
 //  // Function to handle adding a new expense
 //  const addFormHandler = async (event) => {
 //   event.preventDefault();
- 
+
 //   const date = document.querySelector('#date').value.trim();
 //   const category = document.querySelector('#categories').value.trim();
 //   const amount = document.querySelector('#amount').value.trim();
 //   const description = document.querySelector('#description').value.trim();
- 
+
 //   if (date && category && amount) {
 //        const response = await fetch('/api/expenses/add-expense', {
 //            method: 'POST',
 //            body: JSON.stringify({ date, category, amount }),
 //            headers: { 'Content-Type': 'application/json' },
 //        });
- 
+
 //        if (response.ok) {
 //            alert('Expense added!');
 //            // Fetch the updated expense list and append the new expense to the existing list
@@ -237,22 +233,22 @@ seeHomeBtn.addEventListener("click", function () {
 //        }
 //   }
 //  };
- 
+
 //  document.querySelector("#add-expense-btn").addEventListener("click", addFormHandler);
- 
+
 //  // Function to fetch the newly added expense and append it to the list
 //  const fetchAndAppendExpense = async () => {
 //   try {
 //        const response = await fetch('/api/expenses/latest'); // Endpoint to fetch the latest expense added
- 
+
 //        if (response.ok) {
 //            const newExpense = await response.json();
 //            // Append the new expense to the list
 //            appendToList(newExpense);
- 
+
 //            // Update the monthly expenses array
 //            updateMonthlyExpenses(newExpense.date, newExpense.amount);
- 
+
 //            // Render the updated chart
 //            renderExpenseChart();
 //        } else {
