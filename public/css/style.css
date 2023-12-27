@@ -110,3 +110,8 @@ canvas {
 .hidden {
   display: none;
 }
+
+div.in-card- {
+  background-color: #fff;
+  justify-content: center;
+}
