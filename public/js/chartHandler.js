@@ -1,3 +1,9 @@
+// if btn is clicked, render the homepage
+const seeChartBtn = document.querySelector("#see-chart-btn");
+seeChartBtn.addEventListener("click", function () {
+  window.location.href = "/add-expense";
+});
+
 // User's monthly expenses data (replace this with the user's logic)
 // let userMonthlyExpenses = {
 //   January: 0,

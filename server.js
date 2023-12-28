@@ -20,17 +20,17 @@ app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 // Set up middleware
-// app.use(cookieParser());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: new SequelizeStore({
-      db: sequelize,
-    }),
+const sess = {
+  secret: "492e6d5d35b6bcb0f62369d704d778cc",
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
   }),
-);
+};
+
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));

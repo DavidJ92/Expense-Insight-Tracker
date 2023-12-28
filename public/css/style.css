@@ -16,22 +16,14 @@ nav .container {
   font-size: 1.6rem;
 }
 
-
-
-div.card {
-  display: flex;
-  margin: 1rem;
-}
-
 section.in-card {
   flex-wrap: wrap;
   display: inline-flex;
   justify-content: center;
 }
 
-main {
-  flex-wrap: wrap;
-  display: inline-flex;
+button {
+  margin-left: 3%;
 }
 
 .login-card {
@@ -63,7 +55,6 @@ h1 {
 p {
   font-size: 1.1rem;
   text-align: center;
-  margin-top: 10%;
 }
 
 label {
@@ -91,11 +82,22 @@ label {
 
 /* Main content styles */
 .container {
-  margin-top: 20px;
-  background-color: #fff; /* White container background */
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Container shadow */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+div.container {
+  display: inline-block;
+  text-align: center;
+}
+
+label {
+  padding-left: 1%;
+  flex-wrap: wrap;
+  display: inline-flex;
 }
 
 /* Chart canvas styles */
@@ -112,15 +114,20 @@ h2 {
 }
 
 div.card {
-  background-color: #054FB7;
+  background-color: #054fb7;
   color: #fff;
+  display: flex;
+  margin: 1rem;
 }
 
-.main-body {
-  position: fixed;
-  left: 50%;
-  top: 58%;
-  transform: translate(-50%, -50%);
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
 }
 
 .btn {
@@ -131,7 +138,7 @@ div.card {
   border-radius: 0.6em;
   color: #101dd3;
   cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
 }
 
@@ -148,10 +155,54 @@ div.card {
   max-width: 400px;
   width: 100%;
   padding: 20px;
-  box-shadow: 3px 3px 3px black;
   background-color: white;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.list-details {
+  flex-wrap: wrap;
+  display: inline-flex;
+}
+
+.daily-expenses {
+  font-size: 1rem;
+}
+
+div.expense-container {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: left;
+  padding: .5rem;
+}
+
+.expense-container {
+  width: 85%;
+}
+
+.all-container {
+  text-align: -webkit-right;
+}
+
+button.delete-btn {
+  font-size: x-small;
+  text-align: center;
+    vertical-align: middle;
+  box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #101dd3;
+    border-radius: 0.6em;
+    color: #101dd3;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+button.delete-btn:hover {
+  background-color:#101dd3;
+  color: white;
 }

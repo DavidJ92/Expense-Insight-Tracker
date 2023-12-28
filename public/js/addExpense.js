@@ -1,161 +1,61 @@
-// flatpickr to pick date
 document.addEventListener("DOMContentLoaded", function () {
-  flatpickr("#dateInput", {
+  // Initialize flatpickr for date input
+  flatpickr("#date", {
     dateFormat: "F j, Y",
     onChange: function (selectedDates, dateStr, instance) {
       // Update the hidden input with the selected date
       document.getElementById("date").value = dateStr;
     },
   });
-});
 
-// adding expenses and appending to daily expenses list and monthly expenses list
-document.addEventListener("DOMContentLoaded", function () {
-  var expenses = loadExpenses();
+  const addExpenseHandler = async (event) => {
+    event.preventDefault();
+    console.log("Form submitted!");
 
-  // event listener for add-expense-btn click
-  document
-    .getElementById("add-expense-btn")
-    .addEventListener("click", function () {
-      addExpense();
-    });
+    const date = document.querySelector("#date").value.trim();
+    const category = document.querySelector("#category").value.trim();
+    const amount = document.querySelector("#amount").value.trim();
 
-  // function to add an expense to the 'Daily Expenses' list
-  function addExpense() {
-    // get user input values
-    var date = document.getElementById("dateInput").value;
-    var category = document.getElementById("categoryInput").value;
-    var amount = document.getElementById("amountInput").value;
-
-    // show if no date is selected
-    if (!date) {
-      alert("Please select a date.");
-      return;
-    }
-
-    // show error if no amount is entered
-    if (!amount.trim()) {
-      alert("Please enter an amount.");
-      return;
-    }
-
-    // daily expense object
-    var expense = {
-      date: date,
-      category: category,
-      amount: amount,
-    };
-
-    expenses.push(expense);
-    saveExpenses(expenses);
-    updateExpenseList();
-  }
-
-  // function to update daily expense list
-  function updateExpenseList() {
-    var expenseList = document.getElementById("expenseList");
-    expenseList.innerHTML = "";
-
-    var totalAmount = 0;
-    var monthData = {};
-
-    // loop through the daily expenses array and create list items
-    for (var i = 0; i < expenses.length; i++) {
-      var expenseItem = document.createElement("li");
-      expenseItem.textContent = `${expenses[i].date} - ${expenses[i].category}: $${expenses[i].amount}`;
-
-      // extract amount from each user input
-      var amount = parseFloat(expenses[i].amount);
-
-      // update aggregated data
-      totalAmount += amount;
-
-      // extract month and year only from each user input
-      var expenseDate = new Date(expenses[i].date);
-      var expenseMonth = expenseDate.getMonth() + 1; // 0-based month so +1 needed
-      var expenseYear = expenseDate.getFullYear();
-
-      // update aggregated data for a specific month
-      var monthKey = `${expenseMonth}-${expenseYear}`;
-      // if month already exists, add amount to that month
-      if (monthData[monthKey]) {
-        monthData[monthKey].total += amount;
-        monthData[monthKey].expenses.push(expenses[i]);
-      // if month doesn't exist yet on the 'Monthly Expenses' list, create a new list with that new month
-      } else {
-        monthData[monthKey] = {
-          total: amount,
-          expenses: [expenses[i]],
-        };
-      }
-
-      // create a delete button for each expense
-      var deleteButton = document.createElement("button");
-      deleteButton.textContent = "Delete";
-      deleteButton.onclick = createDeleteHandler(i);
-
-      // append delete button to each daily expenses
-      expenseItem.appendChild(deleteButton);
-
-      // append the daily expenses to the expenseList
-      expenseList.appendChild(expenseItem);
-    }
-
-    // store total daily expenses by month
-    var monthlyTotals = Object.keys(monthData).map(function (key) {
-      return { month: key, total: monthData[key].total };
-    });
-    console.log("Monthly Totals:", monthlyTotals);
-
-    var totalMonthList = document.getElementById("totalMonthList");
-    totalMonthList.innerHTML = ""; // replace totalMonthList with the new totalMonthList
-
-    // loop through the monthlyTotals and create list items for 'Monthly Expenses' list
-    monthlyTotals.forEach(function (monthlyTotal) {
-      var totalItem = document.createElement("li");
-
-      var [year, month] = monthlyTotal.month.split("-");
-      var monthDate = new Date(year, parseInt(month) - 1); // adjust back to 0-based month
-
-      // format date as "Month Year"
-      var formattedDate = monthDate.toLocaleDateString("en-US", {
-        month: "long",
-        year: "numeric",
+    if (date && category && amount) {
+      const response = await fetch(`/api/expenses`, {
+        method: "POST",
+        body: JSON.stringify({ date, category, amount }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-      totalItem.textContent = `Total Amount for ${formattedDate}: $${monthlyTotal.total}`;
+      if (response.ok) {
+        document.location.replace("/add-expense");
+      } else {
+        alert("Failed to add expense.");
+      }
+    }
+  };
 
-      // append to the totalsList
-      totalMonthList.appendChild(totalItem);
-    });
-  }
+  const deleteHandler = async (event) => {
+    if (event.target.hasAttribute("data-id")) {
+      const id = event.target.getAttribute("data-id");
 
-  // function to delete daily expenses
-  function createDeleteHandler(index) {
-    return function () {
-      expenses.splice(index, 1);
+      const response = await fetch(`/api/expenses/${id}`, {
+        method: "DELETE",
+      });
 
-      saveExpenses(expenses);
+      if (response.ok) {
+        document.location.replace("/add-expense");
+      } else {
+        alert("Failed to delete expense.");
+      }
+    }
+  };
 
-      updateExpenseList();
+  document
+    .querySelector("#new-expense-form")
+    .addEventListener("submit", addExpenseHandler);
 
-      updateChart();
-    };
-  }
-
-  // function to save expenses to localStorage
-  function saveExpenses(expenses) {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }
-
-  // function to load expenses from localStorage
-  function loadExpenses() {
-    var storedExpenses = localStorage.getItem("expenses");
-    return storedExpenses ? JSON.parse(storedExpenses) : [];
-  }
-
-  // load expenses when the page loads
-  updateExpenseList();
+  document
+    .querySelector("#expense-list")
+    .addEventListener("click", deleteHandler);
 });
 
 // if btn is clicked, render the homepage
