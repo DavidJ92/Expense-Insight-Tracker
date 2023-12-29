@@ -185,26 +185,4 @@ function renderExpenseChart() {
   );
   const monthNumbers = monthLabels.map((month) => monthNumberMap[month]);
   const amountsSpent = expenses.map((exp) => exp.amount);
-
-  // Create Chart instance
-  new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: monthLabels,
-      datasets: [
-        {
-          label: "Amount Spent",
-          data: amountsSpent,
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
 }
