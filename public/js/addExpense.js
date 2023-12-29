@@ -1,13 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize flatpickr for date input
+// date picker
   flatpickr("#date", {
-    dateFormat: "F j, Y",
     onChange: function (selectedDates, dateStr, instance) {
-      // Update the hidden input with the selected date
       document.getElementById("date").value = dateStr;
     },
   });
 
+  // add an expense
   const addExpenseHandler = async (event) => {
     event.preventDefault();
     console.log("Form submitted!");
@@ -25,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       });
 
+      // if expense is added, refresh page
       if (response.ok) {
         document.location.replace("/add-expense");
       } else {
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  // delete an expense
   const deleteHandler = async (event) => {
     if (event.target.hasAttribute("data-id")) {
       const id = event.target.getAttribute("data-id");
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         method: "DELETE",
       });
 
+      // if expense is deleted, refresh page
       if (response.ok) {
         document.location.replace("/add-expense");
       } else {
@@ -49,22 +51,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  // event listener for when adding to daily expenses list
   document
     .querySelector("#new-expense-form")
     .addEventListener("submit", addExpenseHandler);
 
+  // event listener for when deleting from daily expenses list
   document
     .querySelector("#expense-list")
     .addEventListener("click", deleteHandler);
 });
 
-// if btn is clicked, render the homepage
+// if btn is clicked, render the home
 const seeHomeBtn = document.querySelector("#see-home-btn");
 seeHomeBtn.addEventListener("click", function () {
   window.location.href = "/";
 });
 
-// if btn is clicked, render the homepage
+// if btn is clicked, render the monthly-expenses
 const seeMonthBtn = document.querySelector("#see-month-btn");
 seeMonthBtn.addEventListener("click", function () {
   window.location.href = "/monthly-expenses";

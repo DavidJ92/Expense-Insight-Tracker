@@ -1,4 +1,4 @@
-// if btn is clicked, render the homepage
+// if btn is clicked, render the add-expense
 const addBtn = document.querySelector("#add-btn");
 addBtn.addEventListener("click", function () {
   window.location.href = "/add-expense";
