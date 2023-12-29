@@ -26,15 +26,6 @@ button {
   margin-left: 3%;
 }
 
-.login-card {
-  flex-wrap: wrap;
-  display: inline-flex;
-  text-align: left;
-  background-color: #ddd !important;
-}
-
-/* David's CSS */
-
 /* Body styles */
 body {
   font-family: Arial, sans-serif;
@@ -55,34 +46,6 @@ h1 {
 p {
   font-size: 1.1rem;
   text-align: center;
-}
-
-/* Navbar styles */
-.navbar {
-  background-color: #fff; /* White navbar background */
-  box-shadow: 0 4px 6px -6px #222; /* Navbar shadow */
-}
-
-.list-details {
-  flex-wrap: wrap;
-  display: inline-flex;
-}
-
-.navbar a {
-  color: #333; /* Navbar link color */
-}
-
-.navbar a:hover {
-  color: #007bff; /* Hover color */
-}
-
-/* Main content styles */
-.container {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
 }
 
 div.container {
@@ -126,47 +89,6 @@ ul {
   padding-inline-start: 40px;
 }
 
-.btn {
-  box-sizing: border-box;
-  appearance: none;
-  background-color: transparent;
-  border: 2px solid #101dd3;
-  border-radius: 0.6em;
-  color: #101dd3;
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 700;
-}
-
-.btn:hover {
-  background-color: #101dd3;
-  color: #fff;
-}
-
-.hidden {
-  display: none;
-}
-
-.in-card {
-  max-width: 400px;
-  width: 100%;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.list-details {
-  flex-wrap: wrap;
-  display: inline-flex;
-}
-
-.daily-expenses {
-  font-size: 1rem;
-}
-
 div.container,
 div#middle.container {
   display: block;
@@ -208,14 +130,6 @@ div.expense-container {
   padding: 0.5rem;
 }
 
-.expense-container {
-  width: 85%;
-}
-
-.all-container {
-  text-align: -webkit-right;
-}
-
 div#in.container {
   width: 25%;
   margin-top: 3%;
@@ -228,4 +142,88 @@ div#up.container {
 
 div#input-container.form-group {
   display: inline-block;
+}
+
+.login-card {
+  flex-wrap: wrap;
+  display: inline-flex;
+  text-align: left;
+  background-color: #ddd !important;
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #fff; /* White navbar background */
+  box-shadow: 0 4px 6px -6px #222; /* Navbar shadow */
+}
+
+.list-details {
+  flex-wrap: wrap;
+  display: inline-flex;
+}
+
+.navbar a {
+  color: #333; /* Navbar link color */
+}
+
+.navbar a:hover {
+  color: #007bff; /* Hover color */
+}
+
+/* Main content styles */
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.btn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #101dd3;
+  border-radius: 0.6em;
+  color: #101dd3;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+.btn:hover {
+  background-color: #101dd3;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+.in-card {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-details {
+  flex-wrap: wrap;
+  display: inline-flex;
+}
+
+.daily-expenses {
+  font-size: 1rem;
+}
+
+.expense-container {
+  width: 85%;
+}
+
+.all-container {
+  text-align: -webkit-right;
 }

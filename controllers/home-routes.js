@@ -2,9 +2,9 @@ const router = require("express").Router();
 const { Expense, User } = require("../models");
 const withAuth = require("../utils/auth");
 
+// route to get all expenses
 router.get("/", async (req, res) => {
   try {
-    // Get all expenses and JOIN with user data
     const expenseData = await Expense.findAll({
       include: [
         {
@@ -14,27 +14,21 @@ router.get("/", async (req, res) => {
       ],
     });
 
-    // Serialize expense data
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
-
-    // Assuming user_id is stored in the session
     const userId = req.session.user_id;
 
-    // Fetch the logged-in user's data from the database
+    // find logged in user's info
     const userData = await User.findByPk(userId, {
-      attributes: ["name"], // Include other attributes as needed
+      attributes: ["name"],
     });
 
     if (!userData) {
-      // Handle case where user data is not found
       return res.redirect("/login");
     }
 
-    // Pass both serialized expense data and user data to the template
     res.render("home", {
       expenses,
       name: userData.name,
-      // Add other data properties as needed
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -43,6 +37,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// route to find expense by id
 router.get("/expenses/:id", async (req, res) => {
   try {
     const expenseData = await Expense.findByPk(req.params.id, {
@@ -65,10 +60,9 @@ router.get("/expenses/:id", async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
+// route to find user withAuth based on session to add-expense
 router.get("/add-expense", withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
       include: [{ model: Expense }],
@@ -85,9 +79,9 @@ router.get("/add-expense", withAuth, async (req, res) => {
   }
 });
 
+// route to find user withAuth based on session to view monthly expense
 router.get("/monthly-expenses", withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
       include: [{ model: Expense }],
@@ -104,9 +98,8 @@ router.get("/monthly-expenses", withAuth, async (req, res) => {
   }
 });
 
-// redirect to login if the user is logged in; otherwise, render login.handlebars
+// if the user is already logged in, redirect to 'home'
 router.get("/login", (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect("/");
     return;
@@ -115,7 +108,7 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-// redirect to homepage if the user is logged in; otherwise, render signup.handlebars
+// if the user is already signed up, redirect to 'home'
 router.get("/signup", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/");
