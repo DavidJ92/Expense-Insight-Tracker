@@ -57,10 +57,6 @@ p {
   text-align: center;
 }
 
-label {
-  text-align: left;
-}
-
 /* Navbar styles */
 .navbar {
   background-color: #fff; /* White navbar background */
@@ -171,11 +167,45 @@ ul {
   font-size: 1rem;
 }
 
+div.container,
+div#middle.container {
+  display: block;
+}
+
+button.delete-btn {
+  font-size: x-small;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #101dd3;
+  border-radius: 0.6em;
+  color: #101dd3;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+button.delete-btn:hover {
+  background-color: #101dd3;
+  color: white;
+}
+
+a#logout.nav-link {
+  cursor: pointer;
+}
+
 div.expense-container {
   flex-wrap: wrap;
   display: flex;
   justify-content: left;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .expense-container {
@@ -186,23 +216,16 @@ div.expense-container {
   text-align: -webkit-right;
 }
 
-button.delete-btn {
-  font-size: x-small;
-  text-align: center;
-    vertical-align: middle;
-  box-sizing: border-box;
-    appearance: none;
-    background-color: transparent;
-    border: 2px solid #101dd3;
-    border-radius: 0.6em;
-    color: #101dd3;
-    cursor: pointer;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+div#in.container {
+  width: 25%;
+  margin-top: 3%;
 }
 
-button.delete-btn:hover {
-  background-color:#101dd3;
-  color: white;
+div#up.container {
+  width: 25%;
+  margin-top: 0.5%;
+}
+
+div#input-container.form-group {
+  display: inline-block;
 }

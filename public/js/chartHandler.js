@@ -1,6 +1,6 @@
 // if btn is clicked, render the homepage
-const seeChartBtn = document.querySelector("#see-chart-btn");
-seeChartBtn.addEventListener("click", function () {
+const addBtn = document.querySelector("#add-btn");
+addBtn.addEventListener("click", function () {
   window.location.href = "/add-expense";
 });
 

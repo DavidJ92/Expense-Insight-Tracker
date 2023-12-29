@@ -1,90 +1,89 @@
-<div>
-  <div class="container">
-    <h3>New Expense:</h3>
-    <form class="form" id="new-expense-form">
-      <div class="form-group">
-        <label for="date">Date: </label>
-        <input
-          class="form-input"
-          type="text"
-          id="date"
-          placeholder="Select Date"
-          data-input
-        />
-      </div>
-      <div class="form-group">
-        <label for="category">Category: </label>
-        <select class="form-input" id="category" name="category">
-          <option value="Personal Spending">Personal Spending</option>
-          <option value="Travel">Travel</option>
-          <option value="Miscellaneous">Miscellaneous</option>a
-          <option value="Bills & Utilities">Bills &amp; Utilities</option>
-          <option value="Restaurants">Restaurants</option>
-          <option value="Loan Payments">Loan Payments</option>
-          <option value="Groceries">Groceries</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="amount">Amount: <strong>$ </strong></label>
-        <input
-          class="form-input"
-          type="text"
-          id="amount"
-          name="amount"
-          placeholder="00.00"
-        />
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Add to List</button>
-      </div>
+<div class="container">
+  <div>
+    <div class="container" id="middle">
+      <h3>New Expense:</h3>
+      <form class="form" id="new-expense-form">
+        <div class="form-group">
+          <label for="date">Date: </label>
+          <input
+            class="form-input"
+            type="text"
+            id="date"
+            placeholder="Select Date"
+            data-input
+          />
+        </div>
+        <div class="form-group">
+          <label for="category">Category: </label>
+          <select class="form-input" id="category" name="category">
+            <option value="Personal Spending">Personal Spending</option>
+            <option value="Travel">Travel</option>
+            <option value="Miscellaneous">Miscellaneous</option>a
+            <option value="Bills & Utilities">Bills &amp; Utilities</option>
+            <option value="Restaurants">Restaurants</option>
+            <option value="Loan Payments">Loan Payments</option>
+            <option value="Groceries">Groceries</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount: <strong>$ </strong></label>
+          <input
+            class="form-input"
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="00.00"
+          />
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Add to List</button>
+        </div>
 
-    </form>
-  </div>
-
-  {{#if expenses.length}}
-    <div class="container" id="expense-list">
-      <h3>Daily Expenses:</h3>
-
-      <div class="all-container">
-        {{#each expenses as |expense|}}
-       
-          <div class="expense-container">
-            <li class="daily-expenses"><strong>Date:</strong>
-              {{format_date expense.date}}&nbsp;&nbsp;
-              <strong>Category:</strong>
-              {{expense.category}}&nbsp;&nbsp;
-              <strong>Amount: $</strong>
-              {{expense.amount}}</li>&nbsp;
-            <div class="delete-container">
-              <button class="delete-btn" data-id="{{expense.id}}">DELETE</button>
-            </div>
-          </div>
-       
-      {{/each}} </div>
+      </form>
     </div>
-  {{/if}}
-  <div class="container">
-    <div class="form-group">
-      <button class="btn" type="button" id="see-home-btn">Go Back to Line Chart</button>
+
+    {{#if expenses.length}}
+      <div class="container" id="expense-list">
+        <h3>Daily Expenses:</h3>
+
+        <div class="all-container">
+          {{#each expenses as |expense|}}
+
+            <div class="expense-container">
+              <li class="daily-expenses"><strong>Date:</strong>
+                {{format_date expense.date}}&nbsp;&nbsp;
+                <strong>Category:</strong>
+                {{expense.category}}&nbsp;&nbsp;
+                <strong>Amount: $</strong>
+                {{expense.amount}}</li>&nbsp;
+              <div class="delete-container">
+                <button
+                  class="delete-btn"
+                  data-id="{{expense.id}}"
+                >DELETE</button>
+              </div>
+            </div>
+
+          {{/each}}
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    {{/if}}
+    <div class="container" id="middle">
+      <div class="form-group">
+        <button class="btn" type="button" id="see-home-btn">Go Back to Line
+          Chart</button>
+      </div>
+      <div class="form-group">
+        <button class="btn" type="button" id="see-month-btn">See Total Monthly
+          Expenses</button>
+      </div>
     </div>
   </div>
 </div>
 
-{{!-- <!-- monthly expenses container -->
-    <div class="container total-details">
-      <h2 class="list-title">Monthly Expenses</h2>
-      <ul id="totalMonthList">
-        <!-- list of total expenses per month -->
-      </ul>
-      <button class="btn" type="button" id="save-btn">Save</button>
-    </div>
-  </div>
-
-  <div class="container">
-    <button class="btn" type="button" id="see-home-btn">Go Back to Line Chart</button>
-  </div>
-</div> }} --}}
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/js/chartHandler.js"></script>
-<script src="./js/addExpense.js"></script>
+<script src="/js/addExpense.js"></script>
