@@ -86,7 +86,15 @@ const userMonthlyExpenses = {
   January: 500,
   February: 750,
   March: 600,
-  // ... other months
+  April: 250,
+  May: 300,
+  June: 550,
+  July: 789,
+  August: 663,
+  September: 579,
+  October: 653,
+  November: 532,
+  December: 878,
 };
 
 // Assuming userMonthlyExpenses is an object with keys as month names and values as amounts
