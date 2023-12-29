@@ -64,6 +64,18 @@ seeHomeBtn.addEventListener("click", function () {
   window.location.href = "/";
 });
 
+// if btn is clicked, render the homepage
+const seeMonthBtn = document.querySelector("#see-month-btn");
+seeMonthBtn.addEventListener("click", function () {
+  window.location.href = "/monthly-expenses";
+});
+
+// if btn is clicked, render the homepage
+// const addMoreBtn = document.getElementById('addmore-btn');
+// addMoreBtn.addEventListener("click", function () {
+//   window.location.href = "/add-expense";
+// });
+
 //  // Function to update the monthly expenses array
 // function updateMonthlyExpenses(date, amount) {
 //   const month = date.slice(0, 7); // Extract the month from the date

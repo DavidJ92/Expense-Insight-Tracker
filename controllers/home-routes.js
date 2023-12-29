@@ -4,7 +4,7 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    // Get all expenses and JOIN with user data
     const expenseData = await Expense.findAll({
       include: [
         {
@@ -14,16 +14,32 @@ router.get("/", async (req, res) => {
       ],
     });
 
-    // Serialize data so the template can read it
+    // Serialize expense data
     const expenses = expenseData.map((expense) => expense.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
+    // Assuming user_id is stored in the session
+    const userId = req.session.user_id;
+
+    // Fetch the logged-in user's data from the database
+    const userData = await User.findByPk(userId, {
+      attributes: ["name"], // Include other attributes as needed
+    });
+
+    if (!userData) {
+      // Handle case where user data is not found
+      return res.redirect("/login");
+    }
+
+    // Pass both serialized expense data and user data to the template
     res.render("home", {
       expenses,
+      name: userData.name,
+      // Add other data properties as needed
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
@@ -69,27 +85,21 @@ router.get("/add-expense", withAuth, async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get("/monthly-expenses", withAuth, async (req, res) => {
   try {
+    // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [
-        {
-          model: Expense, 
-          attributes: [ 'id', 'date', 'category', 'amount', 'category', 'user_id' ],
-        }
-      ]
+      attributes: { exclude: ["password"] },
+      include: [{ model: Expense }],
     });
 
     const user = userData.get({ plain: true });
-    console.log(user);
 
-    res.render('home', {
+    res.render("monthlyExpense", {
       ...user,
-      logged_in: req.session.logged_in
+      logged_in: true,
     });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -111,17 +121,6 @@ router.get("/signup", (req, res) => {
     res.redirect("/");
   } else {
     res.render("signup");
-  }
-});
-
-// logout and redirect to the homepage
-router.get("/logout", (req, res) => {
-  if (req.session) {
-    req.session.destroy(() => {
-      res.redirect("/");
-    });
-  } else {
-    res.status(404).end();
   }
 });
 

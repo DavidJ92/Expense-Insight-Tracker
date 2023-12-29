@@ -1,15 +1,17 @@
-<div>
+<div class="container">
   <div>
-    <h2>Welcome, {{name}}!</h2>
+    <div class="container" id="name-container">
+      <h2>Welcome, {{name}}!</h2>
+    </div>
   </div>
-</div>
-<div>
-  <div class="container">
-    <canvas id="myChart" width="400" height="300"></canvas>
-  </div>
-  <div class="container">
-    <div class="form-group">
-      <button class="btn" type="button" id="see-chart-btn">Go Back to Line Chart</button>
+  <div>
+    <div class="container" id="middle">
+      <canvas id="myChart" width="400" height="300"></canvas>
+    </div>
+    <div class="container" id="middle">
+      <div class="form-group">
+        <button class="btn" type="button" id="add-btn">Add Another Expense</button>
+      </div>
     </div>
   </div>
 </div>
