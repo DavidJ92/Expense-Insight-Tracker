@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   // date picker
   flatpickr("#date", {
+    dateFormat: "F j, Y",
+    enableTime: false,
     onChange: function (selectedDates, dateStr, instance) {
       document.getElementById("date").value = dateStr;
     },
